@@ -30,10 +30,17 @@ export class GlobeViewComponent implements OnInit, OnChanges {
       await this.initialize();
     }
 
-    // Add markers provided by parent
-    this.inputMarkers.forEach(marker => {
-      this.addMarker(marker);
-    });
+    if (this.inputMarkers.length > 0) {
+      // Add markers provided by parent
+      this.inputMarkers.forEach(marker => {
+        this.addMarker(marker);
+      });
+    } else {
+      this.clearMarkers();
+    }
+
+
+
   }
 
   async initialize() {

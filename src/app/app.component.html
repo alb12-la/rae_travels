@@ -1,8 +1,10 @@
 <html>
 
-
+<div class="">
+    <a class="btn btn-primary m-2" (click)="this.placeMarkers()">Place Markers</a>
+    <a class="btn btn-secondary m-2" (click)="this.clearMarkers()">Clear Markers</a>
+</div>
 <app-globe-view [inputMarkers]="markers"></app-globe-view>
-
 
 </html>
 <router-outlet></router-outlet>
