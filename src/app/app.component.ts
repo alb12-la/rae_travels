@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Marker } from './shared-classes';
+import { Marker, EarthInteractions, Coordinates, CoordinateBoundaries } from './shared-classes';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +8,10 @@ import { Marker } from './shared-classes';
 })
 export class AppComponent implements OnInit {
   displayCrosshairs = false;
+
+  currentPosition: { latitude: number, longitude: number } = { latitude: 0, longitude: 0 };
+  lastUserClick: Coordinates = new Coordinates(100, 2);
+  currentMapBoundaries = new CoordinateBoundaries(0, 0, 0, 0);
 
   markers: Marker[] = [];
   loc1: Marker = {
@@ -44,5 +48,18 @@ export class AppComponent implements OnInit {
 
   clearMarkers() {
     this.markers = [];
+  }
+
+  updateCenterLocation(centerObj: EarthInteractions) {
+    this.currentPosition.latitude = centerObj.mapCenter.latitude;
+    this.currentPosition.longitude = centerObj.mapCenter.longitude;
+
+    this.lastUserClick.latitude = centerObj.userClick.latitude;
+    this.lastUserClick.longitude = centerObj.userClick.longitude;
+
+    this.currentMapBoundaries.maxLatitude = centerObj.mapBoundaries.maxLatitude;
+    this.currentMapBoundaries.minLatitude = centerObj.mapBoundaries.minLatitude;
+    this.currentMapBoundaries.minLongitude = centerObj.mapBoundaries.minLongitude;
+    this.currentMapBoundaries.maxLongitude = centerObj.mapBoundaries.maxLongitude;
   }
 }

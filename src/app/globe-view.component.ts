@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Marker } from './shared-classes';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Marker, Coordinates, EarthInteractions, CoordinateBoundaries } from './shared-classes';
+
 declare var WE: {
   map: any;
   marker: any;
@@ -15,6 +16,7 @@ declare var WE: {
 })
 export class GlobeViewComponent implements OnInit, OnChanges {
   @Input() inputMarkers: Marker[];
+  @Output() getCenterEmitter: EventEmitter<EarthInteractions> = new EventEmitter();
   earth: any;
   webGL: any;
   activeMarkers: any[] = [];
@@ -58,7 +60,20 @@ export class GlobeViewComponent implements OnInit, OnChanges {
 
 
     this.earth.on('click', (e) => {
-      console.log('clickEvent', e);
+      // Get earth center
+      const center = this.earth.getCenter();
+      const centerCoordinates = new Coordinates(center[0], center[1]);
+
+      // Get earth bounds
+      const mapBounds = this.earth.getBounds();
+      const mapCoordinateBoundaries = new CoordinateBoundaries(mapBounds[0], mapBounds[1], mapBounds[2], mapBounds[3]);
+
+      // get user clicks
+      const userClickCoordinates = new Coordinates(e.latitude, e.longitude);
+
+      this.getCenterEmitter.emit(
+        new EarthInteractions(centerCoordinates, mapCoordinateBoundaries, userClickCoordinates)
+      );
     });
   }
 

@@ -6,12 +6,34 @@
     <a class="btn btn-secondary m-2" (click)="this.toggleCrosshairs()">Toggle Crosshairs</a>
 </div>
 
+<div class="card ml-2" style="width: 400px;">
+    <div class="card-body">
+        <div class="form-group">
+            <label>Current Center</label>
+            <p class="form-text text-muted">
+                {{this.currentPosition.latitude}},{{this.currentPosition.longitude}}
+            </p>
+
+            <label>Last place user clicked</label>
+            <p class="form-text text-muted">
+                {{this.lastUserClick.latitude}},{{this.lastUserClick.longitude}}
+            </p>
+
+            <label>Current map boundaries</label>
+            <p class="form-text text-muted">
+                {{this.currentMapBoundaries.minLatitude}},{{this.currentMapBoundaries.maxLatitude}},{{this.currentMapBoundaries.minLongitude}},{{this.currentMapBoundaries.maxLongitude}}
+            </p>
+        </div>
+    </div>
+</div>
+
+
 <div [ngClass]="[displayCrosshairs ? '': 'd-none']">
     <div class="v-line"></div>
     <div class="h-line"></div>
 </div>
 
-<app-globe-view [inputMarkers]="markers"></app-globe-view>
+<app-globe-view (getCenterEmitter)="this.updateCenterLocation($event)" [inputMarkers]="markers"></app-globe-view>
 
 </html>
 <router-outlet></router-outlet>
