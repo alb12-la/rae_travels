@@ -3,7 +3,14 @@
 <div class="">
     <a class="btn btn-primary m-2" (click)="this.placeMarkers()">Place Markers</a>
     <a class="btn btn-secondary m-2" (click)="this.clearMarkers()">Clear Markers</a>
+    <a class="btn btn-secondary m-2" (click)="this.toggleCrosshairs()">Toggle Crosshairs</a>
 </div>
+
+<div [ngClass]="[displayCrosshairs ? '': 'd-none']">
+    <div class="v-line"></div>
+    <div class="h-line"></div>
+</div>
+
 <app-globe-view [inputMarkers]="markers"></app-globe-view>
 
 </html>

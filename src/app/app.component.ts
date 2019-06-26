@@ -7,6 +7,7 @@ import { Marker } from './shared-classes';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  displayCrosshairs = false;
 
   markers: Marker[] = [];
   loc1: Marker = {
@@ -35,6 +36,10 @@ export class AppComponent implements OnInit {
 
   placeMarkers() {
     this.markers = [this.loc1, this.loc2, this.loc3];
+  }
+
+  toggleCrosshairs() {
+    this.displayCrosshairs = !this.displayCrosshairs;
   }
 
   clearMarkers() {
