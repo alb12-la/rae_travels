@@ -12,27 +12,34 @@ export class AppComponent implements OnInit {
   currentPosition: { latitude: number, longitude: number } = { latitude: 0, longitude: 0 };
   lastUserClick: Coordinates = new Coordinates(100, 2);
   currentMapBoundaries = new CoordinateBoundaries(0, 0, 0, 0);
-
+  showActivities = false;
   markers: Marker[] = [];
   loc1: Marker = {
     latitude: 43.7696,
     longitude: 11.2558,
     title: 'Florence, Italy',
-    icon: ''
+    icon: '../assets/markers/florence-marker.png',
+    iconWidth: 80,
+    iconHeight: 80
   };
 
   loc2: Marker = {
     latitude: 9.9281,
     longitude: -84.0907,
     title: 'San José, Costa Rica',
-    icon: ''
+    icon: '../assets/markers/costa-rica-marker.png',
+    iconWidth: 80,
+    iconHeight: 80
   };
+
 
   loc3: Marker = {
     latitude: 47.6062,
     longitude: -122.3321,
     title: 'Seattle, Washington',
-    icon: ''
+    icon: '../assets/markers/seattle-marker.png',
+    iconWidth: 80,
+    iconHeight: 80
   };
 
   ngOnInit() {
@@ -42,6 +49,9 @@ export class AppComponent implements OnInit {
     this.markers = [this.loc1, this.loc2, this.loc3];
   }
 
+  toggleActivities() {
+    this.showActivities = !this.showActivities;
+  }
   toggleCrosshairs() {
     this.displayCrosshairs = !this.displayCrosshairs;
   }

@@ -77,10 +77,16 @@ export class GlobeViewComponent implements OnInit, OnChanges {
     });
   }
 
-
   addMarker(marker: Marker) {
     console.log('Adding', marker);
-    const markerObj = this.webGL.marker([marker.latitude, marker.longitude]).addTo(this.earth);
+    // iconUrl:string?, width:number?, height:number?)
+    const markerObj = this.webGL.marker
+      (
+        [marker.latitude, marker.longitude],
+        marker.icon || '',
+        marker.iconWidth || 80,
+        marker.iconHeight || 80
+      ).addTo(this.earth);
     markerObj.bindPopup(`<b>${marker.title}</b>`);
     this.activeMarkers.push(markerObj);
   }

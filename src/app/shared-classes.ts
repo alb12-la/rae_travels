@@ -3,6 +3,8 @@ export class Marker {
     longitude: number;
     title: string;
     icon: string;
+    iconWidth: number;
+    iconHeight: number;
 }
 
 export class Coordinates {

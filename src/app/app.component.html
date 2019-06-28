@@ -6,7 +6,7 @@
     <a class="btn btn-secondary m-2" (click)="this.toggleCrosshairs()">Toggle Crosshairs</a>
 </div>
 
-<div class="card ml-2" style="width: 400px;">
+<div class="card ml-2 position-fixed" style="width: 400px;">
     <div class="card-body">
         <div class="form-group">
             <label>Current Center</label>
@@ -27,6 +27,10 @@
     </div>
 </div>
 
+<div [ngClass]="showActivities ? 'activities-container':'d-none'">
+    hello
+
+</div>
 
 <div [ngClass]="[displayCrosshairs ? '': 'd-none']">
     <div class="v-line"></div>
@@ -35,5 +39,13 @@
 
 <app-globe-view (getCenterEmitter)="this.updateCenterLocation($event)" [inputMarkers]="markers"></app-globe-view>
 
+<div style="position: fixed; bottom: 0px" class="">
+    <a class="btn btn-primary m-2" (click)="this.placeMarkers()">News</a>
+    <a class="btn btn-secondary m-2" (click)="this.toggleActivities()">Activities</a>
+</div>
+
+
+
 </html>
-<router-outlet></router-outlet>
+<router-outlet>
+</router-outlet>
