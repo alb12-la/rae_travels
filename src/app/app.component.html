@@ -1,48 +1,64 @@
 <html>
+<div id="debug-panel">
+    <div id="debug-controls">
+        <a class="btn btn-primary m-2" (click)="this.placeMarkers()">Place Markers</a>
+        <a class="btn btn-secondary m-2" (click)="this.clearMarkers()">Clear Markers</a>
+        <a class="btn btn-secondary m-2" (click)="this.toggleCrosshairs()">Toggle Crosshairs</a>
+    </div>
+    <!-- Debugging panel -->
+    <div class="card ml-2 position-fixed">
+        <div class="card-body">
+            <div class="form-group">
+                <label>Current Center</label>
+                <samp class="form-text text-muted">
+                    {{this.currentPosition.latitude}},{{this.currentPosition.longitude}}
+                </samp>
 
-<div class="">
-    <a class="btn btn-primary m-2" (click)="this.placeMarkers()">Place Markers</a>
-    <a class="btn btn-secondary m-2" (click)="this.clearMarkers()">Clear Markers</a>
-    <a class="btn btn-secondary m-2" (click)="this.toggleCrosshairs()">Toggle Crosshairs</a>
+                <label>Last place user clicked</label>
+                <samp class="form-text text-muted">
+                    {{this.lastUserClick.latitude}},{{this.lastUserClick.longitude}}
+                </samp>
+
+                <label>Current map boundaries</label>
+                <samp class="form-text text-muted">
+                    {{this.currentMapBoundaries.minLatitude}},{{this.currentMapBoundaries.maxLatitude}},
+                    <br>
+                    {{this.currentMapBoundaries.minLongitude}},{{this.currentMapBoundaries.maxLongitude}}
+                </samp>
+            </div>
+        </div>
+    </div>
+
+    <!-- Crosshairs -->
+    <div [ngClass]="[displayCrosshairs ? '': 'd-none']">
+        <div class="v-line"></div>
+        <div class="h-line"></div>
+    </div>
+
 </div>
 
-<div class="card ml-2 position-fixed" style="width: 400px;">
-    <div class="card-body">
-        <div class="form-group">
-            <label>Current Center</label>
-            <p class="form-text text-muted">
-                {{this.currentPosition.latitude}},{{this.currentPosition.longitude}}
-            </p>
 
-            <label>Last place user clicked</label>
-            <p class="form-text text-muted">
-                {{this.lastUserClick.latitude}},{{this.lastUserClick.longitude}}
-            </p>
+<!-- Slide out container -->
+<div class="slide-out-container">
+    <div id="slide-out-controls" class="w-100 d-flex justify-content-center">
+        <a class="btn btn-primary m-2" (click)="this.placeMarkers()">News</a>
+        <a class="btn btn-secondary m-2" (click)="this.toggleActivities()">Activities</a>
+    </div>
 
-            <label>Current map boundaries</label>
-            <p class="form-text text-muted">
-                {{this.currentMapBoundaries.minLatitude}},{{this.currentMapBoundaries.maxLatitude}},{{this.currentMapBoundaries.minLongitude}},{{this.currentMapBoundaries.maxLongitude}}
-            </p>
+    <div [ngClass]="['slide-out ', showActivities ? 'expand':'']">
+        <div class="jumbotron">
+            <h1 class="display-4">Hello, world!</h1>
+            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention
+                to
+                featured content or information.</p>
+            <hr class="my-4">
+            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
         </div>
     </div>
 </div>
 
-<div [ngClass]="showActivities ? 'activities-container':'d-none'">
-    hello
-
-</div>
-
-<div [ngClass]="[displayCrosshairs ? '': 'd-none']">
-    <div class="v-line"></div>
-    <div class="h-line"></div>
-</div>
-
 <app-globe-view (getCenterEmitter)="this.updateCenterLocation($event)" [inputMarkers]="markers"></app-globe-view>
-
-<div style="position: fixed; bottom: 0px" class="">
-    <a class="btn btn-primary m-2" (click)="this.placeMarkers()">News</a>
-    <a class="btn btn-secondary m-2" (click)="this.toggleActivities()">Activities</a>
-</div>
 
 
 
