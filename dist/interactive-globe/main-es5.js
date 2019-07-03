@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<html>\n\n<div class=\"\">\n    <a class=\"btn btn-primary m-2\" (click)=\"this.placeMarkers()\">Place Markers</a>\n    <a class=\"btn btn-secondary m-2\" (click)=\"this.clearMarkers()\">Clear Markers</a>\n</div>\n<app-globe-view [inputMarkers]=\"markers\"></app-globe-view>\n\n</html>\n<router-outlet></router-outlet>"
+module.exports = "<html>\n<div id=\"debug-panel\">\n    <div id=\"debug-controls\">\n        <a class=\"btn btn-primary m-2\" (click)=\"this.placeMarkers()\">Place Markers</a>\n        <a class=\"btn btn-secondary m-2\" (click)=\"this.clearMarkers()\">Clear Markers</a>\n        <a class=\"btn btn-secondary m-2\" (click)=\"this.toggleCrosshairs()\">Toggle Crosshairs</a>\n    </div>\n    <!-- Debugging panel -->\n    <div class=\"card ml-2 position-fixed\">\n        <div class=\"card-body\">\n            <div class=\"form-group\">\n                <label>Current Center</label>\n                <samp class=\"form-text text-muted\">\n                    {{this.currentPosition.latitude}},{{this.currentPosition.longitude}}\n                </samp>\n\n                <label>Last place user clicked</label>\n                <samp class=\"form-text text-muted\">\n                    {{this.lastUserClick.latitude}},{{this.lastUserClick.longitude}}\n                </samp>\n\n                <label>Current map boundaries</label>\n                <samp class=\"form-text text-muted\">\n                    {{this.currentMapBoundaries.minLatitude}},{{this.currentMapBoundaries.maxLatitude}},\n                    <br>\n                    {{this.currentMapBoundaries.minLongitude}},{{this.currentMapBoundaries.maxLongitude}}\n                </samp>\n            </div>\n        </div>\n    </div>\n\n    <!-- Crosshairs -->\n    <div [ngClass]=\"[displayCrosshairs ? '': 'd-none']\">\n        <div class=\"v-line\"></div>\n        <div class=\"h-line\"></div>\n    </div>\n\n</div>\n\n\n<!-- Slide out container -->\n<div class=\"slide-out-container\">\n    <div id=\"slide-out-controls\" class=\"w-100 d-flex justify-content-center\">\n        <a class=\"btn btn-primary m-2\" (click)=\"this.placeMarkers()\">News</a>\n        <a class=\"btn btn-secondary m-2\" (click)=\"this.toggleActivities()\">Activities</a>\n    </div>\n\n    <div [ngClass]=\"['slide-out ', showActivities ? 'expand':'']\">\n        <div class=\"jumbotron\">\n            <h1 class=\"display-4\">Hello, world!</h1>\n            <p class=\"lead\">This is a simple hero unit, a simple jumbotron-style component for calling extra attention\n                to\n                featured content or information.</p>\n            <hr class=\"my-4\">\n            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>\n            <a class=\"btn btn-primary btn-lg\" href=\"#\" role=\"button\">Learn more</a>\n        </div>\n    </div>\n</div>\n\n<app-globe-view (getCenterEmitter)=\"this.updateCenterLocation($event)\" [inputMarkers]=\"markers\"></app-globe-view>\n\n\n\n</html>\n<router-outlet>\n</router-outlet>"
 
 /***/ }),
 
@@ -101,28 +101,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _shared_classes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shared-classes */ "./src/app/shared-classes.ts");
+
 
 
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
+        this.displayCrosshairs = false;
+        this.currentPosition = { latitude: 0, longitude: 0 };
+        this.lastUserClick = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Coordinates"](100, 2);
+        this.currentMapBoundaries = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["CoordinateBoundaries"](0, 0, 0, 0);
+        this.showActivities = false;
         this.markers = [];
         this.loc1 = {
             latitude: 43.7696,
             longitude: 11.2558,
             title: 'Florence, Italy',
-            icon: ''
+            icon: '../assets/markers/florence-marker.png',
+            iconWidth: 80,
+            iconHeight: 80
         };
         this.loc2 = {
             latitude: 9.9281,
             longitude: -84.0907,
             title: 'San José, Costa Rica',
-            icon: ''
+            icon: '../assets/markers/costa-rica-marker.png',
+            iconWidth: 80,
+            iconHeight: 80
         };
         this.loc3 = {
             latitude: 47.6062,
             longitude: -122.3321,
             title: 'Seattle, Washington',
-            icon: ''
+            icon: '../assets/markers/seattle-marker.png',
+            iconWidth: 80,
+            iconHeight: 80
         };
     }
     AppComponent.prototype.ngOnInit = function () {
@@ -130,8 +143,24 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.placeMarkers = function () {
         this.markers = [this.loc1, this.loc2, this.loc3];
     };
+    AppComponent.prototype.toggleActivities = function () {
+        this.showActivities = !this.showActivities;
+    };
+    AppComponent.prototype.toggleCrosshairs = function () {
+        this.displayCrosshairs = !this.displayCrosshairs;
+    };
     AppComponent.prototype.clearMarkers = function () {
         this.markers = [];
+    };
+    AppComponent.prototype.updateCenterLocation = function (centerObj) {
+        this.currentPosition.latitude = centerObj.mapCenter.latitude;
+        this.currentPosition.longitude = centerObj.mapCenter.longitude;
+        this.lastUserClick.latitude = centerObj.userClick.latitude;
+        this.lastUserClick.longitude = centerObj.userClick.longitude;
+        this.currentMapBoundaries.maxLatitude = centerObj.mapBoundaries.maxLatitude;
+        this.currentMapBoundaries.minLatitude = centerObj.mapBoundaries.minLatitude;
+        this.currentMapBoundaries.minLongitude = centerObj.mapBoundaries.minLongitude;
+        this.currentMapBoundaries.maxLongitude = centerObj.mapBoundaries.maxLongitude;
     };
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -205,10 +234,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GlobeViewComponent", function() { return GlobeViewComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _shared_classes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shared-classes */ "./src/app/shared-classes.ts");
+
 
 
 var GlobeViewComponent = /** @class */ (function () {
     function GlobeViewComponent() {
+        this.getCenterEmitter = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.activeMarkers = [];
     }
     GlobeViewComponent.prototype.ngOnInit = function () {
@@ -247,6 +279,7 @@ var GlobeViewComponent = /** @class */ (function () {
     GlobeViewComponent.prototype.initialize = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var earth;
+            var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 console.log('Initializing');
                 earth = new WE.map('earth_div');
@@ -257,7 +290,15 @@ var GlobeViewComponent = /** @class */ (function () {
                 WE.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(earth);
                 console.log('webGL', this.webGL);
                 this.earth.on('click', function (e) {
-                    console.log('clickEvent', e);
+                    // Get earth center
+                    var center = _this.earth.getCenter();
+                    var centerCoordinates = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Coordinates"](center[0], center[1]);
+                    // Get earth bounds
+                    var mapBounds = _this.earth.getBounds();
+                    var mapCoordinateBoundaries = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["CoordinateBoundaries"](mapBounds[0], mapBounds[1], mapBounds[2], mapBounds[3]);
+                    // get user clicks
+                    var userClickCoordinates = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Coordinates"](e.latitude, e.longitude);
+                    _this.getCenterEmitter.emit(new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["EarthInteractions"](centerCoordinates, mapCoordinateBoundaries, userClickCoordinates));
                 });
                 return [2 /*return*/];
             });
@@ -265,7 +306,8 @@ var GlobeViewComponent = /** @class */ (function () {
     };
     GlobeViewComponent.prototype.addMarker = function (marker) {
         console.log('Adding', marker);
-        var markerObj = this.webGL.marker([marker.latitude, marker.longitude]).addTo(this.earth);
+        // iconUrl:string?, width:number?, height:number?)
+        var markerObj = this.webGL.marker([marker.latitude, marker.longitude], marker.icon || '', marker.iconWidth || 80, marker.iconHeight || 80).addTo(this.earth);
         markerObj.bindPopup("<b>" + marker.title + "</b>");
         this.activeMarkers.push(markerObj);
     };
@@ -282,6 +324,10 @@ var GlobeViewComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Array)
     ], GlobeViewComponent.prototype, "inputMarkers", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"])
+    ], GlobeViewComponent.prototype, "getCenterEmitter", void 0);
     GlobeViewComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-globe-view',
@@ -290,6 +336,56 @@ var GlobeViewComponent = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
     ], GlobeViewComponent);
     return GlobeViewComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared-classes.ts":
+/*!***********************************!*\
+  !*** ./src/app/shared-classes.ts ***!
+  \***********************************/
+/*! exports provided: Marker, Coordinates, CoordinateBoundaries, EarthInteractions */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Marker", function() { return Marker; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Coordinates", function() { return Coordinates; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CoordinateBoundaries", function() { return CoordinateBoundaries; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EarthInteractions", function() { return EarthInteractions; });
+var Marker = /** @class */ (function () {
+    function Marker() {
+    }
+    return Marker;
+}());
+
+var Coordinates = /** @class */ (function () {
+    function Coordinates(latitude, longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+    return Coordinates;
+}());
+
+var CoordinateBoundaries = /** @class */ (function () {
+    function CoordinateBoundaries(minLatitude, maxLatitude, minLongitude, maxLongitude) {
+        this.minLatitude = minLatitude;
+        this.maxLatitude = maxLatitude;
+        this.minLongitude = minLongitude;
+        this.maxLongitude = maxLongitude;
+    }
+    return CoordinateBoundaries;
+}());
+
+var EarthInteractions = /** @class */ (function () {
+    function EarthInteractions(mapCenter, mapBoundaries, userClick) {
+        this.mapCenter = mapCenter;
+        this.mapBoundaries = mapBoundaries;
+        this.userClick = userClick;
+    }
+    return EarthInteractions;
 }());
 
 
