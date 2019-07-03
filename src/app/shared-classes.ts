@@ -27,6 +27,5 @@ export class EarthInteractions {
     constructor(
         public mapCenter: Coordinates,
         public mapBoundaries: CoordinateBoundaries,
-        public userClick: Coordinates
     ) { }
 }

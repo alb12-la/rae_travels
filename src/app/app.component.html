@@ -1,29 +1,34 @@
 <html>
 <div id="debug-panel">
+    <!-- Debugging Buttons -->
     <div id="debug-controls">
         <a class="btn btn-primary m-2" (click)="this.placeMarkers()">Place Markers</a>
         <a class="btn btn-secondary m-2" (click)="this.clearMarkers()">Clear Markers</a>
         <a class="btn btn-secondary m-2" (click)="this.toggleCrosshairs()">Toggle Crosshairs</a>
     </div>
     <!-- Debugging panel -->
-    <div class="card ml-2 position-fixed">
+    <div class="card ml-2 position-fixed" style="background: rgba(247, 247, 247, .7)!important">
         <div class="card-body">
             <div class="form-group">
-                <label>Current Center</label>
-                <samp class="form-text text-muted">
-                    {{this.currentPosition.latitude}},{{this.currentPosition.longitude}}
-                </samp>
+                <!-- Current center -->
+                <ng-container *ngIf="this.currentPosition">
+                    <label class="mt-2">Current Center</label>
+                    <samp class="form-text text-muted">
+                        {{this.currentPosition.latitude}},{{this.currentPosition.longitude}}
+                    </samp>
+                </ng-container>
 
-                <label>Last place user clicked</label>
+                <!-- Current map boundaries -->
+                <label class="mt-2">Current map boundaries</label>
                 <samp class="form-text text-muted">
-                    {{this.lastUserClick.latitude}},{{this.lastUserClick.longitude}}
-                </samp>
-
-                <label>Current map boundaries</label>
-                <samp class="form-text text-muted">
-                    {{this.currentMapBoundaries.minLatitude}},{{this.currentMapBoundaries.maxLatitude}},
-                    <br>
-                    {{this.currentMapBoundaries.minLongitude}},{{this.currentMapBoundaries.maxLongitude}}
+                    <ng-container *ngIf="this.currentMapBoundaries else emptyState">
+                        {{this.currentMapBoundaries.minLatitude}},{{this.currentMapBoundaries.maxLatitude}},
+                        <br>
+                        {{this.currentMapBoundaries.minLongitude}},{{this.currentMapBoundaries.maxLongitude}}
+                    </ng-container>
+                    <ng-template #emptyState>
+                        zoomed out too far
+                    </ng-template>
                 </samp>
             </div>
         </div>
@@ -34,9 +39,7 @@
         <div class="v-line"></div>
         <div class="h-line"></div>
     </div>
-
 </div>
-
 
 <!-- Slide out container -->
 <div class="slide-out-container">
@@ -59,8 +62,6 @@
 </div>
 
 <app-globe-view (getCenterEmitter)="this.updateCenterLocation($event)" [inputMarkers]="markers"></app-globe-view>
-
-
 
 </html>
 <router-outlet>

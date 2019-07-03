@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, OnInit, ElementRef, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { Marker, Coordinates, EarthInteractions, CoordinateBoundaries } from './shared-classes';
 
 declare var WE: {
@@ -12,18 +12,25 @@ declare var WE: {
 @Component({
   selector: 'app-globe-view',
   templateUrl: './globe-view.component.html',
-  styles: []
 })
 export class GlobeViewComponent implements OnInit, OnChanges {
+  @ViewChild('earth', { static: true }) earthContainer: ElementRef;
   @Input() inputMarkers: Marker[];
   @Output() getCenterEmitter: EventEmitter<EarthInteractions> = new EventEmitter();
   earth: any;
   webGL: any;
   activeMarkers: any[] = [];
-
   constructor() { }
 
   async ngOnInit() {
+    // mousewheel listener
+    this.earthContainer.nativeElement.addEventListener('mousewheel', (event: Event) => this.updateCoordinates(event));
+
+    // touch device listener
+    this.earthContainer.nativeElement.addEventListener('touchend', (event: Event) => this.updateCoordinates(event));
+
+    // click listener
+    this.earthContainer.nativeElement.addEventListener('click', (event: Event) => this.updateCoordinates(event));
   }
 
   async ngOnChanges(changes: SimpleChanges) {
@@ -40,9 +47,6 @@ export class GlobeViewComponent implements OnInit, OnChanges {
     } else {
       this.clearMarkers();
     }
-
-
-
   }
 
   async initialize() {
@@ -57,24 +61,34 @@ export class GlobeViewComponent implements OnInit, OnChanges {
     this.webGL = WE;
     WE.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(earth);
     console.log('webGL', this.webGL);
+  }
 
+  updateCoordinates(e: Event) {
+    /**
+     * Get Earth center
+     * @returns Coordinates(Lat, lng)
+     * What the cross hairs are pointed at
+     */
+    const center = this.earth.getCenter();
+    const centerCoordinates = new Coordinates(center[0], center[1]);
 
-    this.earth.on('click', (e) => {
-      // Get earth center
-      const center = this.earth.getCenter();
-      const centerCoordinates = new Coordinates(center[0], center[1]);
+    /**
+     * Get Earth bounds
+     * @returns [minLat,minLong],[maxLat,maxLng]
+     * If the zoomed out too far, this returns null;
+     */
+    const mapBounds = this.earth.getBounds();
+    let mapCoordinateBoundaries: CoordinateBoundaries;
+    if (mapBounds !== null) {
+      mapCoordinateBoundaries = new CoordinateBoundaries(mapBounds[0], mapBounds[1], mapBounds[2], mapBounds[3]);
+    }
 
-      // Get earth bounds
-      const mapBounds = this.earth.getBounds();
-      const mapCoordinateBoundaries = new CoordinateBoundaries(mapBounds[0], mapBounds[1], mapBounds[2], mapBounds[3]);
-
-      // get user clicks
-      const userClickCoordinates = new Coordinates(e.latitude, e.longitude);
-
-      this.getCenterEmitter.emit(
-        new EarthInteractions(centerCoordinates, mapCoordinateBoundaries, userClickCoordinates)
-      );
-    });
+    /**
+     * Emit EarthInteractions to parent
+     */
+    this.getCenterEmitter.emit(
+      new EarthInteractions(centerCoordinates, mapCoordinateBoundaries)
+    );
   }
 
   addMarker(marker: Marker) {
@@ -89,10 +103,6 @@ export class GlobeViewComponent implements OnInit, OnChanges {
       ).addTo(this.earth);
     markerObj.bindPopup(`<b>${marker.title}</b>`);
     this.activeMarkers.push(markerObj);
-  }
-
-  active() {
-    console.log(this.activeMarkers);
   }
 
   clearMarkers() {

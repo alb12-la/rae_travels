@@ -8,12 +8,12 @@ import { Marker, EarthInteractions, Coordinates, CoordinateBoundaries } from './
 })
 export class AppComponent implements OnInit {
   displayCrosshairs = false;
-
-  currentPosition: { latitude: number, longitude: number } = { latitude: 0, longitude: 0 };
-  lastUserClick: Coordinates = new Coordinates(100, 2);
-  currentMapBoundaries = new CoordinateBoundaries(0, 0, 0, 0);
+  currentPosition = undefined;
+  currentMapBoundaries = undefined;
   showActivities = false;
   markers: Marker[] = [];
+
+  // Mock data
   loc1: Marker = {
     latitude: 43.7696,
     longitude: 11.2558,
@@ -31,7 +31,6 @@ export class AppComponent implements OnInit {
     iconWidth: 80,
     iconHeight: 80
   };
-
 
   loc3: Marker = {
     latitude: 47.6062,
@@ -61,15 +60,23 @@ export class AppComponent implements OnInit {
   }
 
   updateCenterLocation(centerObj: EarthInteractions) {
-    this.currentPosition.latitude = centerObj.mapCenter.latitude;
-    this.currentPosition.longitude = centerObj.mapCenter.longitude;
+    if (centerObj.mapCenter) {
+      this.currentPosition = new Coordinates(
+        centerObj.mapCenter.latitude,
+        centerObj.mapCenter.longitude
+      );
+    } else {
+      this.currentPosition = undefined;
+    }
 
-    this.lastUserClick.latitude = centerObj.userClick.latitude;
-    this.lastUserClick.longitude = centerObj.userClick.longitude;
-
-    this.currentMapBoundaries.maxLatitude = centerObj.mapBoundaries.maxLatitude;
-    this.currentMapBoundaries.minLatitude = centerObj.mapBoundaries.minLatitude;
-    this.currentMapBoundaries.minLongitude = centerObj.mapBoundaries.minLongitude;
-    this.currentMapBoundaries.maxLongitude = centerObj.mapBoundaries.maxLongitude;
+    if (centerObj.mapBoundaries) {
+      this.currentMapBoundaries = new CoordinateBoundaries(
+        centerObj.mapBoundaries.minLatitude,
+        centerObj.mapBoundaries.maxLatitude,
+        centerObj.mapBoundaries.minLongitude,
+        centerObj.mapBoundaries.maxLongitude);
+    } else {
+      this.currentMapBoundaries = undefined;
+    }
   }
 }
