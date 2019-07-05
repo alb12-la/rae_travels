@@ -21,8 +21,8 @@ export class RestHelperService {
   async getAddressAtCoordinates(coordinates: Coordinates): Promise<Address> {
     const builtURL = `${this.resourceURL}?key=${this.apiKey}&location=${coordinates.latitude},${coordinates.longitude}`;
     // *Switch between real / mock results below*
-    // const response = await this.get(builtURL);
-    const response = JSON.parse(this.mock);
+    const response = await this.get(builtURL);
+    // const response = JSON.parse(this.mock);
     const fistAddress = response.results[0].locations[0];
 
     // Extract address
