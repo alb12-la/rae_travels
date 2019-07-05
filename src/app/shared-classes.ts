@@ -29,3 +29,13 @@ export class EarthInteractions {
         public mapBoundaries: CoordinateBoundaries,
     ) { }
 }
+
+
+export class Address {
+    constructor(
+        public street: string,
+        public country: string,
+        public county: string,
+        public city: string
+    ) { }
+}

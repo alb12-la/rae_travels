@@ -10,6 +10,12 @@
     <div class="card ml-2 position-fixed">
         <div class="card-body">
             <div class="form-group">
+                <ng-container *ngIf="this.currentAddress">
+                    <label class="mt-2">Current</label>
+                    <samp class="form-text">
+                        {{this.currentAddress.country}},{{this.currentAddress.city}},{{this.currentAddress.street}}
+                    </samp>
+                </ng-container>
                 <!-- Current center -->
                 <ng-container *ngIf="this.currentPosition">
                     <label class="mt-2">Current Center</label>
@@ -56,7 +62,11 @@
                 featured content or information.</p>
             <hr class="my-4">
             <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            <ng-container *ngIf="this.currentAddress">
+                <h2>{{this.currentAddress.country}}</h2>
+                <h3>{{this.currentAddress.city}},{{this.currentAddress.street}}</h3>
+            </ng-container>
+
         </div>
     </div>
 </div>

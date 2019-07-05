@@ -55,6 +55,7 @@ export class GlobeViewComponent implements OnInit, OnChanges {
     // Earth
     const earth = new WE.map('earth_div');
     this.earth = earth;
+    this.earth.on('click', (event) => { console.log('eearth', event); });
     console.log('Earth', this.earth);
 
     // WEBGL

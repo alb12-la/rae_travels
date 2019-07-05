@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Marker, EarthInteractions, Coordinates, CoordinateBoundaries } from './shared-classes';
+import { Marker, EarthInteractions, Coordinates, CoordinateBoundaries, Address } from './shared-classes';
 
+import { RestHelperService } from './services/rest-helper.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,6 +13,11 @@ export class AppComponent implements OnInit {
   currentMapBoundaries = undefined;
   showActivities = false;
   markers: Marker[] = [];
+  currentAddress: Address = undefined;
+
+  constructor(
+    private restHelperService: RestHelperService,
+  ) { }
 
   // Mock data
   loc1: Marker = {
@@ -63,12 +69,16 @@ export class AppComponent implements OnInit {
     this.markers = [];
   }
 
-  updateCenterLocation(centerObj: EarthInteractions) {
+  async updateCenterLocation(centerObj: EarthInteractions) {
+
     if (centerObj.mapCenter) {
       this.currentPosition = new Coordinates(
         centerObj.mapCenter.latitude,
         centerObj.mapCenter.longitude
       );
+
+      // Get address from service
+      this.currentAddress = await this.restHelperService.getAddressAtCoordinates(this.currentPosition);
     } else {
       this.currentPosition = undefined;
     }
