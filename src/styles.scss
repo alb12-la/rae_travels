@@ -1,4 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+// Changes the color of globe background
+$spaceColor:black;
+
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#earth_div {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: $spaceColor;
+    position: absolute !important;
+    z-index: -1;
+}
+
+#debug-panel {
+    .card {
+        background: rgba(247, 247, 247, .5) !important;
+    }
+}
+
 .h-line {
     height: 50vh;
     width: 100vw;

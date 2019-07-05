@@ -7,20 +7,20 @@
         <a class="btn btn-secondary m-2" (click)="this.toggleCrosshairs()">Toggle Crosshairs</a>
     </div>
     <!-- Debugging panel -->
-    <div class="card ml-2 position-fixed" style="background: rgba(247, 247, 247, .7)!important">
+    <div class="card ml-2 position-fixed">
         <div class="card-body">
             <div class="form-group">
                 <!-- Current center -->
                 <ng-container *ngIf="this.currentPosition">
                     <label class="mt-2">Current Center</label>
-                    <samp class="form-text text-muted">
+                    <samp class="form-text">
                         {{this.currentPosition.latitude}},{{this.currentPosition.longitude}}
                     </samp>
                 </ng-container>
 
                 <!-- Current map boundaries -->
                 <label class="mt-2">Current map boundaries</label>
-                <samp class="form-text text-muted">
+                <samp class="form-text">
                     <ng-container *ngIf="this.currentMapBoundaries else emptyState">
                         {{this.currentMapBoundaries.minLatitude}},{{this.currentMapBoundaries.maxLatitude}},
                         <br>
