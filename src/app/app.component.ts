@@ -42,6 +42,10 @@ export class AppComponent implements OnInit {
   };
 
   ngOnInit() {
+    // Prevent pinch to zoom;
+    document.addEventListener('gesturechange', (event: Event) => {
+      event.preventDefault();
+    });
   }
 
   placeMarkers() {
