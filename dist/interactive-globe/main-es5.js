@@ -85,7 +85,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAuY29tcG9uZW50LnNjc3MifQ== */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyJ9 */"
 
 /***/ }),
 
@@ -143,7 +143,7 @@ var AppComponent = /** @class */ (function () {
         };
     }
     AppComponent.prototype.ngOnInit = function () {
-        // Prevent pinch to zoom;
+        // Prevent `pinch to zoom` on mobile devices;
         document.addEventListener('gesturechange', function (event) {
             event.preventDefault();
         });
@@ -267,6 +267,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _shared_classes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shared-classes */ "./src/app/shared-classes.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+
+
 
 
 
@@ -274,17 +278,22 @@ var GlobeViewComponent = /** @class */ (function () {
     function GlobeViewComponent() {
         this.getCenterEmitter = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.activeMarkers = [];
+        this.interactions = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
     }
     GlobeViewComponent.prototype.ngOnInit = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                // Debounce UpdateCoordinates to help limit api calls
+                this.interactions.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["debounceTime"])(500)).subscribe(function (event) {
+                    _this.updateCoordinates(event);
+                });
                 // mousewheel listener
-                this.earthContainer.nativeElement.addEventListener('mousewheel', function (event) { return _this.updateCoordinates(event); });
-                // touch device listener
-                this.earthContainer.nativeElement.addEventListener('touchend', function (event) { return _this.updateCoordinates(event); });
-                // click listener
-                this.earthContainer.nativeElement.addEventListener('click', function (event) { return _this.updateCoordinates(event); });
+                this.earthContainer.nativeElement.addEventListener('mousewheel', function (event) { return _this.interactions.next(event); });
+                // // touch device listener
+                this.earthContainer.nativeElement.addEventListener('touchend', function (event) { return _this.interactions.next(event); });
+                // // click listener
+                this.earthContainer.nativeElement.addEventListener('click', function (event) { return _this.interactions.next(event); });
                 return [2 /*return*/];
             });
         });
@@ -301,13 +310,14 @@ var GlobeViewComponent = /** @class */ (function () {
                         _a.sent();
                         _a.label = 2;
                     case 2:
+                        // Apply or update markers provided by parents
                         if (this.inputMarkers.length > 0) {
-                            // Add markers provided by parent
                             this.inputMarkers.forEach(function (marker) {
                                 _this.addMarker(marker);
                             });
                         }
                         else {
+                            // Input markers list is empty, remove any previously existing markers
                             this.clearMarkers();
                         }
                         return [2 /*return*/];
@@ -319,10 +329,9 @@ var GlobeViewComponent = /** @class */ (function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var earth;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                console.log('Initializing');
+                console.log('Initializing Earth');
                 earth = new WE.map('earth_div');
                 this.earth = earth;
-                this.earth.on('click', function (event) { console.log('eearth', event); });
                 console.log('Earth', this.earth);
                 // WEBGL
                 this.webGL = WE;
@@ -359,7 +368,11 @@ var GlobeViewComponent = /** @class */ (function () {
         console.log('Adding', marker);
         // iconUrl:string?, width:number?, height:number?)
         var markerObj = this.webGL.marker([marker.latitude, marker.longitude], marker.icon || '', marker.iconWidth || 80, marker.iconHeight || 80).addTo(this.earth);
+        // HTML inside of marker popup
         markerObj.bindPopup("<b>" + marker.title + "</b>");
+        // Call back function on marker
+        markerObj.on('click', function (event) { return console.log('Ive been clicked: ', marker.title); });
+        // Add to internal list of markers
         this.activeMarkers.push(markerObj);
     };
     GlobeViewComponent.prototype.clearMarkers = function () {
@@ -415,13 +428,16 @@ __webpack_require__.r(__webpack_exports__);
 var RestHelperService = /** @class */ (function () {
     function RestHelperService(http) {
         this.http = http;
+        /**
+         * FULL DOCUMENTATION:
+         * https://developer.mapquest.com/documentation/geocoding-api/reverse/get/
+         */
         this.apiKey = 'pemyzdGTMUoqyLXClEl8XAjGwkFatXmi';
         this.resourceURL = 'http://www.mapquestapi.com/geocoding/v1/reverse';
         // MOCK DATA
         // tslint:disable-next-line:max-line-length
-        this.mock = "{\"info\":{\"statuscode\":0,\"copyright\":{\"text\":\"\u00A9 2019 MapQuest, Inc.\",\"imageUrl\":\"http://api.mqcdn.com/res/mqlogo.gif\",\"imageAltText\":\"\u00A9 2019 MapQuest, Inc.\"},\"messages\":[]},\"options\":{\"maxResults\":1,\"thumbMaps\":true,\"ignoreLatLngInput\":false},\"results\":[{\"providedLocation\":{\"latLng\":{\"lat\":43.7696,\"lng\":11.2558}},\"locations\":[{\"street\":\"Fontana del Nettuno\",\"adminArea6\":\"\",\"adminArea6Type\":\"Neighborhood\",\"adminArea5\":\"Florence\",\"adminArea5Type\":\"City\",\"adminArea4\":\"\",\"adminArea4Type\":\"County\",\"adminArea3\":\"Tuscany\",\"adminArea3Type\":\"State\",\"adminArea1\":\"IT\",\"adminArea1Type\":\"Country\",\"postalCode\":\"50122\",\"geocodeQualityCode\":\"P1AAA\",\"geocodeQuality\":\"POINT\",\"dragPoint\":false,\"sideOfStreet\":\"N\",\"linkId\":\"0\",\"unknownInput\":\"\",\"type\":\"s\",\"latLng\":{\"lat\":43.769596,\"lng\":11.255981},\"displayLatLng\":{\"lat\":43.769596,\"lng\":11.255981},\"mapUrl\":\"http://www.mapquestapi.com/staticmap/v5/map?key=pemyzdGTMUoqyLXClEl8XAjGwkFatXmi&type=map&size=225,160&locations=43.7695957,11.2559808|marker-sm-50318A-1&scalebar=true&zoom=15&rand=-1621384462\",\"nearestIntersection\":null}]}]}";
+        this.mockResults = "{\"info\":{\"statuscode\":0,\"copyright\":{\"text\":\"\u00A9 2019 MapQuest, Inc.\",\"imageUrl\":\"http://api.mqcdn.com/res/mqlogo.gif\",\"imageAltText\":\"\u00A9 2019 MapQuest, Inc.\"},\"messages\":[]},\"options\":{\"maxResults\":1,\"thumbMaps\":true,\"ignoreLatLngInput\":false},\"results\":[{\"providedLocation\":{\"latLng\":{\"lat\":43.7696,\"lng\":11.2558}},\"locations\":[{\"street\":\"Fontana del Nettuno\",\"adminArea6\":\"\",\"adminArea6Type\":\"Neighborhood\",\"adminArea5\":\"Florence\",\"adminArea5Type\":\"City\",\"adminArea4\":\"\",\"adminArea4Type\":\"County\",\"adminArea3\":\"Tuscany\",\"adminArea3Type\":\"State\",\"adminArea1\":\"IT\",\"adminArea1Type\":\"Country\",\"postalCode\":\"50122\",\"geocodeQualityCode\":\"P1AAA\",\"geocodeQuality\":\"POINT\",\"dragPoint\":false,\"sideOfStreet\":\"N\",\"linkId\":\"0\",\"unknownInput\":\"\",\"type\":\"s\",\"latLng\":{\"lat\":43.769596,\"lng\":11.255981},\"displayLatLng\":{\"lat\":43.769596,\"lng\":11.255981},\"mapUrl\":\"http://www.mapquestapi.com/staticmap/v5/map?key=pemyzdGTMUoqyLXClEl8XAjGwkFatXmi&type=map&size=225,160&locations=43.7695957,11.2559808|marker-sm-50318A-1&scalebar=true&zoom=15&rand=-1621384462\",\"nearestIntersection\":null}]}]}";
     }
-    // TODO : Add debouncer to not make too many api calls
     RestHelperService.prototype.getAddressAtCoordinates = function (coordinates) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var builtURL, response, fistAddress, returnAddress;
@@ -478,7 +494,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EarthInteractions", function() { return EarthInteractions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Address", function() { return Address; });
 var Marker = /** @class */ (function () {
-    function Marker() {
+    function Marker(latitude, longitude, title, icon, iconWidth, iconHeight) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.title = title;
+        this.icon = icon;
+        this.iconWidth = iconWidth;
+        this.iconHeight = iconHeight;
     }
     return Marker;
 }());
