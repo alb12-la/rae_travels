@@ -4,6 +4,7 @@ import { Marker, Coordinates, EarthInteractions, CoordinateBoundaries } from './
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
+// WE is loaded from a script, this gets rid of warning against WE not being found
 declare var WE: {
   map: any;
   marker: any;
@@ -28,7 +29,7 @@ export class GlobeViewComponent implements OnInit, OnChanges {
   constructor() { }
 
   async ngOnInit() {
-
+    // Debounce UpdateCoordinates to help limit api calls
     this.interactions.pipe(
       debounceTime(500)
     ).subscribe((event) => {
@@ -51,18 +52,19 @@ export class GlobeViewComponent implements OnInit, OnChanges {
       await this.initialize();
     }
 
+    // Apply or update markers provided by parents
     if (this.inputMarkers.length > 0) {
-      // Add markers provided by parent
       this.inputMarkers.forEach(marker => {
         this.addMarker(marker);
       });
     } else {
+      // Input markers list is empty, remove any previously existing markers
       this.clearMarkers();
     }
   }
 
   async initialize() {
-    console.log('Initializing');
+    console.log('Initializing Earth');
 
     // Earth
     const earth = new WE.map('earth_div');
@@ -113,7 +115,11 @@ export class GlobeViewComponent implements OnInit, OnChanges {
         marker.iconWidth || 80,
         marker.iconHeight || 80
       ).addTo(this.earth);
+    // HTML inside of marker popup
     markerObj.bindPopup(`<b>${marker.title}</b>`);
+    // Call back function on marker
+    markerObj.on('click', (event) => console.log('Ive been clicked: ', marker.title));
+    // Add to internal list of markers
     this.activeMarkers.push(markerObj);
   }
 
