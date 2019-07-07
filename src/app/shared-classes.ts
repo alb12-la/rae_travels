@@ -1,10 +1,12 @@
 export class Marker {
-    latitude: number;
-    longitude: number;
-    title: string;
-    icon: string;
-    iconWidth: number;
-    iconHeight: number;
+    constructor(
+        public latitude: number,
+        public longitude: number,
+        public title: string,
+        public icon: string,
+        public iconWidth: number,
+        public iconHeight: number,
+    ) { }
 }
 
 export class Coordinates {
