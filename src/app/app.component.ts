@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Marker, EarthInteractions, Coordinates, CoordinateBoundaries, Address } from './shared-classes';
 
+import { Marker, EarthInteractions, Coordinates, CoordinateBoundaries, Address } from './shared-classes';
 import { RestHelperService } from './services/rest-helper.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -48,7 +49,7 @@ export class AppComponent implements OnInit {
   };
 
   ngOnInit() {
-    // Prevent pinch to zoom;
+    // Prevent `pinch to zoom` on mobile devices;
     document.addEventListener('gesturechange', (event: Event) => {
       event.preventDefault();
     });
@@ -61,6 +62,7 @@ export class AppComponent implements OnInit {
   toggleActivities() {
     this.showActivities = !this.showActivities;
   }
+
   toggleCrosshairs() {
     this.displayCrosshairs = !this.displayCrosshairs;
   }
@@ -70,7 +72,6 @@ export class AppComponent implements OnInit {
   }
 
   async updateCenterLocation(centerObj: EarthInteractions) {
-
     if (centerObj.mapCenter) {
       this.currentPosition = new Coordinates(
         centerObj.mapCenter.latitude,
