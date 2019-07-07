@@ -1,6 +1,9 @@
 import { Component, ViewChild, OnInit, ElementRef, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { Marker, Coordinates, EarthInteractions, CoordinateBoundaries } from './shared-classes';
 
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+
 declare var WE: {
   map: any;
   marker: any;
@@ -20,17 +23,26 @@ export class GlobeViewComponent implements OnInit, OnChanges {
   earth: any;
   webGL: any;
   activeMarkers: any[] = [];
+  private interactions = new Subject<Event>();
+
   constructor() { }
 
   async ngOnInit() {
+
+    this.interactions.pipe(
+      debounceTime(500)
+    ).subscribe((event) => {
+      this.updateCoordinates(event);
+    });
+
     // mousewheel listener
-    this.earthContainer.nativeElement.addEventListener('mousewheel', (event: Event) => this.updateCoordinates(event));
+    this.earthContainer.nativeElement.addEventListener('mousewheel', (event: Event) => this.interactions.next(event));
 
-    // touch device listener
-    this.earthContainer.nativeElement.addEventListener('touchend', (event: Event) => this.updateCoordinates(event));
+    // // touch device listener
+    this.earthContainer.nativeElement.addEventListener('touchend', (event: Event) => this.interactions.next(event));
 
-    // click listener
-    this.earthContainer.nativeElement.addEventListener('click', (event: Event) => this.updateCoordinates(event));
+    // // click listener
+    this.earthContainer.nativeElement.addEventListener('click', (event: Event) => this.interactions.next(event));
   }
 
   async ngOnChanges(changes: SimpleChanges) {
@@ -55,7 +67,6 @@ export class GlobeViewComponent implements OnInit, OnChanges {
     // Earth
     const earth = new WE.map('earth_div');
     this.earth = earth;
-    this.earth.on('click', (event) => { console.log('eearth', event); });
     console.log('Earth', this.earth);
 
     // WEBGL
