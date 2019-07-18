@@ -9,7 +9,7 @@ import { RestHelperService } from './services/rest-helper.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  displayCrosshairs = false;
+  displayCrosshairs = true;
   currentPosition = undefined;
   currentMapBoundaries = undefined;
   showActivities = false;

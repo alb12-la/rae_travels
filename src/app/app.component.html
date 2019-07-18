@@ -1,41 +1,25 @@
 <html>
 <div id="debug-panel">
-    <!-- Debugging Buttons -->
-    <div id="debug-controls">
-        <a class="btn btn-primary m-2" (click)="this.placeMarkers()">Place Markers</a>
-        <a class="btn btn-secondary m-2" (click)="this.clearMarkers()">Clear Markers</a>
-        <a class="btn btn-secondary m-2" (click)="this.toggleCrosshairs()">Toggle Crosshairs</a>
-    </div>
     <!-- Debugging panel -->
-    <div class="card ml-2 position-fixed">
+    <div class="card position-fixed">
         <div class="card-body">
             <div class="form-group">
                 <ng-container *ngIf="this.currentAddress">
-                    <label class="mt-2">Current</label>
-                    <samp class="form-text">
+                    <label class="mt-2">Address</label>
+                    <h3 class="form-text">
                         {{this.currentAddress.country}},{{this.currentAddress.city}},{{this.currentAddress.street}}
-                    </samp>
+                    </h3>
                 </ng-container>
                 <!-- Current center -->
-                <ng-container *ngIf="this.currentPosition">
-                    <label class="mt-2">Current Center</label>
-                    <samp class="form-text">
+                <ng-container *ngIf="this.currentPosition else emptyState">
+                    <label class="mt-2">Coordinates</label>
+                    <h3 class="form-text">
                         {{this.currentPosition.latitude}},{{this.currentPosition.longitude}}
-                    </samp>
+                    </h3>
                 </ng-container>
-
-                <!-- Current map boundaries -->
-                <label class="mt-2">Current map boundaries</label>
-                <samp class="form-text">
-                    <ng-container *ngIf="this.currentMapBoundaries else emptyState">
-                        {{this.currentMapBoundaries.minLatitude}},{{this.currentMapBoundaries.maxLatitude}},
-                        <br>
-                        {{this.currentMapBoundaries.minLongitude}},{{this.currentMapBoundaries.maxLongitude}}
-                    </ng-container>
-                    <ng-template #emptyState>
-                        zoomed out too far
-                    </ng-template>
-                </samp>
+                <ng-template #emptyState>
+                    You're too far away! Zoom in closer.
+                </ng-template>
             </div>
         </div>
     </div>
@@ -44,30 +28,6 @@
     <div [ngClass]="[displayCrosshairs ? '': 'd-none']">
         <div class="v-line"></div>
         <div class="h-line"></div>
-    </div>
-</div>
-
-<!-- Slide out container -->
-<div class="slide-out-container">
-    <div id="slide-out-controls" class="w-100 d-flex justify-content-center">
-        <a class="btn btn-primary m-2" (click)="this.placeMarkers()">News</a>
-        <a class="btn btn-secondary m-2" (click)="this.toggleActivities()">Activities</a>
-    </div>
-
-    <div [ngClass]="['slide-out ', showActivities ? 'expand':'']">
-        <div class="jumbotron">
-            <h1 class="display-4">Hello, world!</h1>
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention
-                to
-                featured content or information.</p>
-            <hr class="my-4">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <ng-container *ngIf="this.currentAddress">
-                <h2>{{this.currentAddress.country}}</h2>
-                <h3>{{this.currentAddress.city}},{{this.currentAddress.street}}</h3>
-            </ng-container>
-
-        </div>
     </div>
 </div>
 

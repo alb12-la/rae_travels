@@ -12,7 +12,7 @@ export class RestHelperService {
    * https://developer.mapquest.com/documentation/geocoding-api/reverse/get/
    */
 
-  apiKey = 'pemyzdGTMUoqyLXClEl8XAjGwkFatXmi';
+  apiKey = 'a96bRRUWLMGr90r3HGN9c5oVROjJa6lA';
   resourceURL = 'http://www.mapquestapi.com/geocoding/v1/reverse';
 
   // MOCK DATA
@@ -41,7 +41,6 @@ export class RestHelperService {
       fistAddress.adminArea1,
       fistAddress.adminArea5
     );
-    console.log(returnAddress);
     return returnAddress;
   }
   // TODO: Use proper try catch techniques.
