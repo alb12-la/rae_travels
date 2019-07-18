@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<html>\n<div id=\"debug-panel\">\n    <!-- Debugging Buttons -->\n    <div id=\"debug-controls\">\n        <a class=\"btn btn-primary m-2\" (click)=\"this.placeMarkers()\">Place Markers</a>\n        <a class=\"btn btn-secondary m-2\" (click)=\"this.clearMarkers()\">Clear Markers</a>\n        <a class=\"btn btn-secondary m-2\" (click)=\"this.toggleCrosshairs()\">Toggle Crosshairs</a>\n    </div>\n    <!-- Debugging panel -->\n    <div class=\"card ml-2 position-fixed\">\n        <div class=\"card-body\">\n            <div class=\"form-group\">\n                <ng-container *ngIf=\"this.currentAddress\">\n                    <label class=\"mt-2\">Current</label>\n                    <samp class=\"form-text\">\n                        {{this.currentAddress.country}},{{this.currentAddress.city}},{{this.currentAddress.street}}\n                    </samp>\n                </ng-container>\n                <!-- Current center -->\n                <ng-container *ngIf=\"this.currentPosition\">\n                    <label class=\"mt-2\">Current Center</label>\n                    <samp class=\"form-text\">\n                        {{this.currentPosition.latitude}},{{this.currentPosition.longitude}}\n                    </samp>\n                </ng-container>\n\n                <!-- Current map boundaries -->\n                <label class=\"mt-2\">Current map boundaries</label>\n                <samp class=\"form-text\">\n                    <ng-container *ngIf=\"this.currentMapBoundaries else emptyState\">\n                        {{this.currentMapBoundaries.minLatitude}},{{this.currentMapBoundaries.maxLatitude}},\n                        <br>\n                        {{this.currentMapBoundaries.minLongitude}},{{this.currentMapBoundaries.maxLongitude}}\n                    </ng-container>\n                    <ng-template #emptyState>\n                        zoomed out too far\n                    </ng-template>\n                </samp>\n            </div>\n        </div>\n    </div>\n\n    <!-- Crosshairs -->\n    <div [ngClass]=\"[displayCrosshairs ? '': 'd-none']\">\n        <div class=\"v-line\"></div>\n        <div class=\"h-line\"></div>\n    </div>\n</div>\n\n<!-- Slide out container -->\n<div class=\"slide-out-container\">\n    <div id=\"slide-out-controls\" class=\"w-100 d-flex justify-content-center\">\n        <a class=\"btn btn-primary m-2\" (click)=\"this.placeMarkers()\">News</a>\n        <a class=\"btn btn-secondary m-2\" (click)=\"this.toggleActivities()\">Activities</a>\n    </div>\n\n    <div [ngClass]=\"['slide-out ', showActivities ? 'expand':'']\">\n        <div class=\"jumbotron\">\n            <h1 class=\"display-4\">Hello, world!</h1>\n            <p class=\"lead\">This is a simple hero unit, a simple jumbotron-style component for calling extra attention\n                to\n                featured content or information.</p>\n            <hr class=\"my-4\">\n            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>\n            <ng-container *ngIf=\"this.currentAddress\">\n                <h2>{{this.currentAddress.country}}</h2>\n                <h3>{{this.currentAddress.city}},{{this.currentAddress.street}}</h3>\n            </ng-container>\n\n        </div>\n    </div>\n</div>\n\n<app-globe-view (getCenterEmitter)=\"this.updateCenterLocation($event)\" [inputMarkers]=\"markers\"></app-globe-view>\n\n</html>\n<router-outlet>\n</router-outlet>"
+module.exports = "<html>\n<div id=\"debug-panel\">\n    <!-- Debugging panel -->\n    <div class=\"card position-fixed\">\n        <div class=\"card-body\">\n            <div class=\"form-group\">\n                <ng-container *ngIf=\"this.currentAddress\">\n                    <label class=\"mt-2\">Address</label>\n                    <h3 class=\"form-text\">\n                        {{this.currentAddress.country}},{{this.currentAddress.city}},{{this.currentAddress.street}}\n                    </h3>\n                </ng-container>\n                <!-- Current center -->\n                <ng-container *ngIf=\"this.currentPosition else emptyState\">\n                    <label class=\"mt-2\">Coordinates</label>\n                    <h3 class=\"form-text\">\n                        {{this.currentPosition.latitude}},{{this.currentPosition.longitude}}\n                    </h3>\n                </ng-container>\n                <ng-template #emptyState>\n                    You're too far away! Zoom in closer.\n                </ng-template>\n            </div>\n        </div>\n    </div>\n\n    <!-- Crosshairs -->\n    <div [ngClass]=\"[displayCrosshairs ? '': 'd-none']\">\n        <div class=\"v-line\"></div>\n        <div class=\"h-line\"></div>\n    </div>\n</div>\n\n<app-globe-view (getCenterEmitter)=\"this.updateCenterLocation($event)\" [inputMarkers]=\"markers\"></app-globe-view>\n\n</html>\n<router-outlet>\n</router-outlet>"
 
 /***/ }),
 
@@ -107,7 +107,7 @@ __webpack_require__.r(__webpack_exports__);
 let AppComponent = class AppComponent {
     constructor(restHelperService) {
         this.restHelperService = restHelperService;
-        this.displayCrosshairs = false;
+        this.displayCrosshairs = true;
         this.currentPosition = undefined;
         this.currentMapBoundaries = undefined;
         this.showActivities = false;
@@ -395,7 +395,7 @@ let RestHelperService = class RestHelperService {
          * FULL DOCUMENTATION:
          * https://developer.mapquest.com/documentation/geocoding-api/reverse/get/
          */
-        this.apiKey = 'pemyzdGTMUoqyLXClEl8XAjGwkFatXmi';
+        this.apiKey = 'a96bRRUWLMGr90r3HGN9c5oVROjJa6lA';
         this.resourceURL = 'http://www.mapquestapi.com/geocoding/v1/reverse';
         // MOCK DATA
         // tslint:disable-next-line:max-line-length
@@ -412,7 +412,6 @@ let RestHelperService = class RestHelperService {
             const fistAddress = response.results[0].locations[0];
             // Extract address
             const returnAddress = new _shared_classes__WEBPACK_IMPORTED_MODULE_3__["Address"](fistAddress.street, fistAddress.adminArea3, fistAddress.adminArea1, fistAddress.adminArea5);
-            console.log(returnAddress);
             return returnAddress;
         });
     }
@@ -554,7 +553,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/alb17/interactive-globe/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/alb17/interactive-earth/src/main.ts */"./src/main.ts");
 
 
 /***/ })
