@@ -22,30 +22,48 @@ export class AppComponent implements OnInit {
 
   // Mock data
   loc1: Marker = {
-    latitude: 43.7696,
-    longitude: 11.2558,
-    title: 'Florence, Italy',
-    icon: '../assets/markers/florence-marker.png',
-    iconWidth: 80,
-    iconHeight: 80
+    latitude: 48.684820,
+    longitude: -123.213830,
+    title: 'Cattle Point Lighthouse',
+    icon: '../assets/markers/cattle-point-lighthouse-marker.png',
+    iconWidth: 100,
+    iconHeight: 100
   };
 
   loc2: Marker = {
-    latitude: 9.9281,
-    longitude: -84.0907,
-    title: 'San José, Costa Rica',
-    icon: '../assets/markers/costa-rica-marker.png',
-    iconWidth: 80,
-    iconHeight: 80
+    latitude: 32.752310,
+    longitude: -117.194640,
+    title: 'Old Town, San Diego',
+    icon: '../assets/markers/san-diego-marker.png',
+    iconWidth: 100,
+    iconHeight: 100
   };
 
   loc3: Marker = {
-    latitude: 47.6062,
-    longitude: -122.3321,
-    title: 'Seattle, Washington',
-    icon: '../assets/markers/seattle-marker.png',
-    iconWidth: 80,
-    iconHeight: 80
+    latitude: 35.417440,
+    longitude: -113.042250,
+    title: 'Copper Cart, Rte 66',
+    icon: '../assets/markers/route-66-marker.png',
+    iconWidth: 100,
+    iconHeight: 100
+  };
+
+  loc4: Marker = {
+    latitude: 41.403191,
+    longitude: 2.174840,
+    title: 'Barcelona',
+    icon: '../assets/markers/barcelona-marker.png',
+    iconWidth: 100,
+    iconHeight: 100
+  };
+
+  loc5: Marker = {
+    latitude: 36.172501,
+    longitude: -115.144508,
+    title: 'Hotel California',
+    icon: '../assets/markers/vegas-marker.png',
+    iconWidth: 100,
+    iconHeight: 100
   };
 
   ngOnInit() {
@@ -53,10 +71,11 @@ export class AppComponent implements OnInit {
     document.addEventListener('gesturechange', (event: Event) => {
       event.preventDefault();
     });
+    this.placeMarkers();
   }
 
   placeMarkers() {
-    this.markers = [this.loc1, this.loc2, this.loc3];
+    this.markers = [this.loc1, this.loc2, this.loc3, this.loc4, this.loc5];
   }
 
   toggleActivities() {
@@ -79,7 +98,7 @@ export class AppComponent implements OnInit {
       );
 
       // Get address from service
-      this.currentAddress = await this.restHelperService.getAddressAtCoordinates(this.currentPosition);
+      // this.currentAddress = await this.restHelperService.getAddressAtCoordinates(this.currentPosition);
     } else {
       this.currentPosition = undefined;
     }

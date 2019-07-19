@@ -1,7 +1,7 @@
 <html>
 <div id="debug-panel">
     <!-- Debugging panel -->
-    <div class="card position-fixed">
+    <!-- <div class="card position-fixed">
         <div class="card-body">
             <div class="form-group">
                 <ng-container *ngIf="this.currentAddress">
@@ -10,7 +10,7 @@
                         {{this.currentAddress.country}},{{this.currentAddress.city}},{{this.currentAddress.street}}
                     </h3>
                 </ng-container>
-                <!-- Current center -->
+
                 <ng-container *ngIf="this.currentPosition else emptyState">
                     <label class="mt-2">Coordinates</label>
                     <h3 class="form-text">
@@ -22,7 +22,7 @@
                 </ng-template>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Crosshairs -->
     <div [ngClass]="[displayCrosshairs ? '': 'd-none']">
