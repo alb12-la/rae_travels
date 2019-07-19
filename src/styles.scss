@@ -21,6 +21,13 @@ body {
     z-index: -1;
 }
 
+.exit-slide-out {
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+    font-size: 2em;
+}
+
 #debug-panel {
     .card {
         background: rgba(247, 247, 247, .5) !important;
@@ -54,11 +61,12 @@ body {
 .slide-out {
     font-weight: 100;
     background: #efefef;
-    width: 100vw;
+    width: 50vw;
     height: 100vh;
     position: fixed;
     z-index: 50;
-    top: 100vh;
+    left: 100vw;
+    min-width: 500px;
     -webkit-box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.2);
     box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.2);
     transition: all 0.3s;
@@ -67,6 +75,6 @@ body {
 }
 
 .expand {
-    transform: translate3d(0, -100%, 0);
+    transform: translate3d(-100%, 0, 0);
     animation-timing-function: 1s ease-in;
 }

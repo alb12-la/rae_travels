@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Marker, EarthInteractions, Coordinates, CoordinateBoundaries, Address } from './shared-classes';
+import { Marker, EarthInteractions, Coordinates, CoordinateBoundaries, Address, Content } from './shared-classes';
 import { RestHelperService } from './services/rest-helper.service';
+
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit {
   showActivities = false;
   markers: Marker[] = [];
   currentAddress: Address = undefined;
+  selectedMarker: Marker;
 
   constructor(
     private restHelperService: RestHelperService,
@@ -48,13 +50,24 @@ export class AppComponent implements OnInit {
     iconHeight: 100
   };
 
+  barcelonaContent1: Content = {
+    type: 'img',
+    url: '../assets/images/barcelona1.jpg'
+  };
+
+  barcelonaContent2: Content = {
+    type: 'img',
+    url: '../assets/images/barcelona2.jpg'
+  };
+
   loc4: Marker = {
     latitude: 41.403191,
     longitude: 2.174840,
     title: 'Barcelona',
     icon: '../assets/markers/barcelona-marker.png',
     iconWidth: 100,
-    iconHeight: 100
+    iconHeight: 100,
+    associatedContent: [this.barcelonaContent1, this.barcelonaContent2]
   };
 
   loc5: Marker = {
@@ -88,6 +101,13 @@ export class AppComponent implements OnInit {
 
   clearMarkers() {
     this.markers = [];
+  }
+
+  selectMarker(marker: Marker) {
+    this.selectedMarker = marker;
+    this.showActivities = true;
+
+    console.log('updated marker to', marker)
   }
 
   async updateCenterLocation(centerObj: EarthInteractions) {

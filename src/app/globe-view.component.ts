@@ -21,6 +21,7 @@ export class GlobeViewComponent implements OnInit, OnChanges {
   @ViewChild('earth', { static: true }) earthContainer: ElementRef;
   @Input() inputMarkers: Marker[];
   @Output() getCenterEmitter: EventEmitter<EarthInteractions> = new EventEmitter();
+  @Output() selectedMarker: EventEmitter<Marker> = new EventEmitter();
   earth: any;
   webGL: any;
   activeMarkers: any[] = [];
@@ -116,9 +117,11 @@ export class GlobeViewComponent implements OnInit, OnChanges {
         marker.iconHeight || 80
       ).addTo(this.earth);
     // HTML inside of marker popup
-    markerObj.bindPopup(`<b>${marker.title}</b>`);
+    // markerObj.bindPopup(`<b>${marker.title}</b>`);
     // Call back function on marker
-    markerObj.on('click', (event) => console.log('Ive been clicked: ', marker.title));
+    markerObj.on('click', (event) => {
+      this.selectedMarker.emit(marker);
+    });
     // Add to internal list of markers
     this.activeMarkers.push(markerObj);
   }

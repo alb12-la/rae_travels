@@ -6,6 +6,14 @@ export class Marker {
         public icon: string,
         public iconWidth: number,
         public iconHeight: number,
+        public associatedContent?: Content[]
+    ) { }
+}
+
+export class Content {
+    constructor(
+        public type: string,
+        public url: string
     ) { }
 }
 

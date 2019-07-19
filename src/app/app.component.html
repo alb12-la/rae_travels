@@ -24,6 +24,8 @@
         </div>
     </div> -->
 
+
+
     <!-- Crosshairs -->
     <div [ngClass]="[displayCrosshairs ? '': 'd-none']">
         <div class="v-line"></div>
@@ -31,7 +33,35 @@
     </div>
 </div>
 
-<app-globe-view (getCenterEmitter)="this.updateCenterLocation($event)" [inputMarkers]="markers"></app-globe-view>
+<div class="slide-out-container">
+    <div id="slide-out-controls" class="w-100 d-flex justify-content-center">
+        <!-- <a class="btn btn-primary m-2" (click)="this.placeMarkers()">News</a>
+        <a class="btn btn-secondary m-2" (click)="this.toggleActivities()">Activities</a> -->
+    </div>
+    <!-- Pop out container-->
+    <div [ngClass]="['slide-out overflow-auto ', showActivities ? 'expand':'']">
+        <div class="exit-slide-out font-weight-bold" (click)="toggleActivities()">x</div>
+        <div *ngIf="this.selectedMarker" class="jumbotron">
+            <h1 class="display-4">{{this.selectedMarker.title}}</h1>
+
+            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention
+                to
+                featured content or information.</p>
+            <hr class="my-4">
+
+            <div *ngIf="this.selectedMarker.associatedContent">
+                <ng-container *ngFor="let content of this.selectedMarker.associatedContent">
+                    <img [src]="content.url" class="rounded w-100 m-2" alt="...">
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<app-globe-view (selectedMarker)="selectMarker($event)" (getCenterEmitter)="this.updateCenterLocation($event)"
+    [inputMarkers]="markers"></app-globe-view>
 
 </html>
 <router-outlet>
