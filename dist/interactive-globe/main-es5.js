@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<html>\n<div id=\"debug-panel\">\n    <!-- Debugging panel -->\n    <div class=\"card position-fixed\">\n        <div class=\"card-body\">\n            <div class=\"form-group\">\n                <ng-container *ngIf=\"this.currentAddress\">\n                    <label class=\"mt-2\">Address</label>\n                    <h3 class=\"form-text\">\n                        {{this.currentAddress.country}},{{this.currentAddress.city}},{{this.currentAddress.street}}\n                    </h3>\n                </ng-container>\n                <!-- Current center -->\n                <ng-container *ngIf=\"this.currentPosition else emptyState\">\n                    <label class=\"mt-2\">Coordinates</label>\n                    <h3 class=\"form-text\">\n                        {{this.currentPosition.latitude}},{{this.currentPosition.longitude}}\n                    </h3>\n                </ng-container>\n                <ng-template #emptyState>\n                    You're too far away! Zoom in closer.\n                </ng-template>\n            </div>\n        </div>\n    </div>\n\n    <!-- Crosshairs -->\n    <div [ngClass]=\"[displayCrosshairs ? '': 'd-none']\">\n        <div class=\"v-line\"></div>\n        <div class=\"h-line\"></div>\n    </div>\n</div>\n\n<app-globe-view (getCenterEmitter)=\"this.updateCenterLocation($event)\" [inputMarkers]=\"markers\"></app-globe-view>\n\n</html>\n<router-outlet>\n</router-outlet>"
+module.exports = "<html>\n<div id=\"debug-panel\">\n    <!-- Debugging panel -->\n    <!-- <div class=\"card position-fixed\">\n        <div class=\"card-body\">\n            <div class=\"form-group\">\n                <ng-container *ngIf=\"this.currentAddress\">\n                    <label class=\"mt-2\">Address</label>\n                    <h3 class=\"form-text\">\n                        {{this.currentAddress.country}},{{this.currentAddress.city}},{{this.currentAddress.street}}\n                    </h3>\n                </ng-container>\n\n                <ng-container *ngIf=\"this.currentPosition else emptyState\">\n                    <label class=\"mt-2\">Coordinates</label>\n                    <h3 class=\"form-text\">\n                        {{this.currentPosition.latitude}},{{this.currentPosition.longitude}}\n                    </h3>\n                </ng-container>\n                <ng-template #emptyState>\n                    You're too far away! Zoom in closer.\n                </ng-template>\n            </div>\n        </div>\n    </div> -->\n\n\n\n    <!-- Crosshairs -->\n    <div [ngClass]=\"[displayCrosshairs ? '': 'd-none']\">\n        <div class=\"v-line\"></div>\n        <div class=\"h-line\"></div>\n    </div>\n</div>\n\n<div class=\"slide-out-container\">\n    <div id=\"slide-out-controls\" class=\"w-100 d-flex justify-content-center\">\n        <!-- <a class=\"btn btn-primary m-2\" (click)=\"this.placeMarkers()\">News</a>\n        <a class=\"btn btn-secondary m-2\" (click)=\"this.toggleActivities()\">Activities</a> -->\n    </div>\n    <!-- Pop out container-->\n    <div [ngClass]=\"['slide-out overflow-auto ', showActivities ? 'expand':'']\">\n        <div class=\"exit-slide-out font-weight-bold\" (click)=\"toggleActivities()\">x</div>\n        <div *ngIf=\"this.selectedMarker\" class=\"jumbotron\">\n            <h1 class=\"display-4\">{{this.selectedMarker.title}}</h1>\n\n            <p class=\"lead\">This is a simple hero unit, a simple jumbotron-style component for calling extra attention\n                to\n                featured content or information.</p>\n            <hr class=\"my-4\">\n\n            <div *ngIf=\"this.selectedMarker.associatedContent\">\n                <ng-container *ngFor=\"let content of this.selectedMarker.associatedContent\">\n                    <img [src]=\"content.url\" class=\"rounded w-100 m-2\" alt=\"...\">\n                </ng-container>\n            </div>\n        </div>\n    </div>\n</div>\n\n\n\n<app-globe-view (selectedMarker)=\"selectMarker($event)\" (getCenterEmitter)=\"this.updateCenterLocation($event)\"\n    [inputMarkers]=\"markers\"></app-globe-view>\n\n</html>\n<router-outlet>\n</router-outlet>"
 
 /***/ }),
 
@@ -118,28 +118,53 @@ var AppComponent = /** @class */ (function () {
         this.currentAddress = undefined;
         // Mock data
         this.loc1 = {
-            latitude: 43.7696,
-            longitude: 11.2558,
-            title: 'Florence, Italy',
-            icon: '../assets/markers/florence-marker.png',
-            iconWidth: 80,
-            iconHeight: 80
+            latitude: 48.684820,
+            longitude: -123.213830,
+            title: 'Cattle Point Lighthouse',
+            icon: '../assets/markers/cattle-point-lighthouse-marker.png',
+            iconWidth: 100,
+            iconHeight: 100
         };
         this.loc2 = {
-            latitude: 9.9281,
-            longitude: -84.0907,
-            title: 'San José, Costa Rica',
-            icon: '../assets/markers/costa-rica-marker.png',
-            iconWidth: 80,
-            iconHeight: 80
+            latitude: 32.752310,
+            longitude: -117.194640,
+            title: 'Old Town, San Diego',
+            icon: '../assets/markers/san-diego-marker.png',
+            iconWidth: 100,
+            iconHeight: 100
         };
         this.loc3 = {
-            latitude: 47.6062,
-            longitude: -122.3321,
-            title: 'Seattle, Washington',
-            icon: '../assets/markers/seattle-marker.png',
-            iconWidth: 80,
-            iconHeight: 80
+            latitude: 35.417440,
+            longitude: -113.042250,
+            title: 'Copper Cart, Rte 66',
+            icon: '../assets/markers/route-66-marker.png',
+            iconWidth: 100,
+            iconHeight: 100
+        };
+        this.barcelonaContent1 = {
+            type: 'img',
+            url: '../assets/images/barcelona1.jpg'
+        };
+        this.barcelonaContent2 = {
+            type: 'img',
+            url: '../assets/images/barcelona2.jpg'
+        };
+        this.loc4 = {
+            latitude: 41.403191,
+            longitude: 2.174840,
+            title: 'Barcelona',
+            icon: '../assets/markers/barcelona-marker.png',
+            iconWidth: 100,
+            iconHeight: 100,
+            associatedContent: [this.barcelonaContent1, this.barcelonaContent2]
+        };
+        this.loc5 = {
+            latitude: 36.172501,
+            longitude: -115.144508,
+            title: 'Hotel California',
+            icon: '../assets/markers/vegas-marker.png',
+            iconWidth: 100,
+            iconHeight: 100
         };
     }
     AppComponent.prototype.ngOnInit = function () {
@@ -147,9 +172,10 @@ var AppComponent = /** @class */ (function () {
         document.addEventListener('gesturechange', function (event) {
             event.preventDefault();
         });
+        this.placeMarkers();
     };
     AppComponent.prototype.placeMarkers = function () {
-        this.markers = [this.loc1, this.loc2, this.loc3];
+        this.markers = [this.loc1, this.loc2, this.loc3, this.loc4, this.loc5];
     };
     AppComponent.prototype.toggleActivities = function () {
         this.showActivities = !this.showActivities;
@@ -160,33 +186,29 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.clearMarkers = function () {
         this.markers = [];
     };
+    AppComponent.prototype.selectMarker = function (marker) {
+        this.selectedMarker = marker;
+        this.showActivities = true;
+        console.log('updated marker to', marker);
+    };
     AppComponent.prototype.updateCenterLocation = function (centerObj) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var _a;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        if (!centerObj.mapCenter) return [3 /*break*/, 2];
-                        this.currentPosition = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Coordinates"](centerObj.mapCenter.latitude, centerObj.mapCenter.longitude);
-                        // Get address from service
-                        _a = this;
-                        return [4 /*yield*/, this.restHelperService.getAddressAtCoordinates(this.currentPosition)];
-                    case 1:
-                        // Get address from service
-                        _a.currentAddress = _b.sent();
-                        return [3 /*break*/, 3];
-                    case 2:
-                        this.currentPosition = undefined;
-                        _b.label = 3;
-                    case 3:
-                        if (centerObj.mapBoundaries) {
-                            this.currentMapBoundaries = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["CoordinateBoundaries"](centerObj.mapBoundaries.minLatitude, centerObj.mapBoundaries.maxLatitude, centerObj.mapBoundaries.minLongitude, centerObj.mapBoundaries.maxLongitude);
-                        }
-                        else {
-                            this.currentMapBoundaries = undefined;
-                        }
-                        return [2 /*return*/];
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                if (centerObj.mapCenter) {
+                    this.currentPosition = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Coordinates"](centerObj.mapCenter.latitude, centerObj.mapCenter.longitude);
+                    // Get address from service
+                    // this.currentAddress = await this.restHelperService.getAddressAtCoordinates(this.currentPosition);
                 }
+                else {
+                    this.currentPosition = undefined;
+                }
+                if (centerObj.mapBoundaries) {
+                    this.currentMapBoundaries = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["CoordinateBoundaries"](centerObj.mapBoundaries.minLatitude, centerObj.mapBoundaries.maxLatitude, centerObj.mapBoundaries.minLongitude, centerObj.mapBoundaries.maxLongitude);
+                }
+                else {
+                    this.currentMapBoundaries = undefined;
+                }
+                return [2 /*return*/];
             });
         });
     };
@@ -277,6 +299,7 @@ __webpack_require__.r(__webpack_exports__);
 var GlobeViewComponent = /** @class */ (function () {
     function GlobeViewComponent() {
         this.getCenterEmitter = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        this.selectedMarker = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.activeMarkers = [];
         this.interactions = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
     }
@@ -365,13 +388,16 @@ var GlobeViewComponent = /** @class */ (function () {
         this.getCenterEmitter.emit(new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["EarthInteractions"](centerCoordinates, mapCoordinateBoundaries));
     };
     GlobeViewComponent.prototype.addMarker = function (marker) {
+        var _this = this;
         console.log('Adding', marker);
         // iconUrl:string?, width:number?, height:number?)
         var markerObj = this.webGL.marker([marker.latitude, marker.longitude], marker.icon || '', marker.iconWidth || 80, marker.iconHeight || 80).addTo(this.earth);
         // HTML inside of marker popup
-        markerObj.bindPopup("<b>" + marker.title + "</b>");
+        // markerObj.bindPopup(`<b>${marker.title}</b>`);
         // Call back function on marker
-        markerObj.on('click', function (event) { return console.log('Ive been clicked: ', marker.title); });
+        markerObj.on('click', function (event) {
+            _this.selectedMarker.emit(marker);
+        });
         // Add to internal list of markers
         this.activeMarkers.push(markerObj);
     };
@@ -393,6 +419,10 @@ var GlobeViewComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"])
     ], GlobeViewComponent.prototype, "getCenterEmitter", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"])
+    ], GlobeViewComponent.prototype, "selectedMarker", void 0);
     GlobeViewComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-globe-view',
@@ -482,26 +512,36 @@ var RestHelperService = /** @class */ (function () {
 /*!***********************************!*\
   !*** ./src/app/shared-classes.ts ***!
   \***********************************/
-/*! exports provided: Marker, Coordinates, CoordinateBoundaries, EarthInteractions, Address */
+/*! exports provided: Marker, Content, Coordinates, CoordinateBoundaries, EarthInteractions, Address */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Marker", function() { return Marker; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Content", function() { return Content; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Coordinates", function() { return Coordinates; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CoordinateBoundaries", function() { return CoordinateBoundaries; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EarthInteractions", function() { return EarthInteractions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Address", function() { return Address; });
 var Marker = /** @class */ (function () {
-    function Marker(latitude, longitude, title, icon, iconWidth, iconHeight) {
+    function Marker(latitude, longitude, title, icon, iconWidth, iconHeight, associatedContent) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.title = title;
         this.icon = icon;
         this.iconWidth = iconWidth;
         this.iconHeight = iconHeight;
+        this.associatedContent = associatedContent;
     }
     return Marker;
+}());
+
+var Content = /** @class */ (function () {
+    function Content(type, url) {
+        this.type = type;
+        this.url = url;
+    }
+    return Content;
 }());
 
 var Coordinates = /** @class */ (function () {
@@ -605,7 +645,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/alb17/interactive-earth/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/alb17/rae_travels/src/main.ts */"./src/main.ts");
 
 
 /***/ })
