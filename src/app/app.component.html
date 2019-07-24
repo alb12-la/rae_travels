@@ -43,8 +43,8 @@
     </div>
 </div>
 
-<app-globe-view (selectedMarker)="selectMarker($event)" (getCenterEmitter)="this.updateCenterLocation($event)"
-    [inputMarkers]="markers"></app-globe-view>
+<app-globe-view (selectedMarker)="selectMarker($event)" (selectedOutside)="deSelectMarker()" [inputMarkers]="markers">
+</app-globe-view>
 
 </html>
 <router-outlet>

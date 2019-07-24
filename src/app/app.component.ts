@@ -109,6 +109,11 @@ export class AppComponent implements OnInit {
     console.log('updated marker to', marker);
   }
 
+  deSelectMarker() {
+    this.selectedMarker = undefined;
+    this.showActivities = false;
+  }
+
   async updateCenterLocation(centerObj: EarthInteractions) {
     if (centerObj.mapCenter) {
       this.currentPosition = new Coordinates(

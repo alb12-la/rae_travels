@@ -22,6 +22,7 @@ export class GlobeViewComponent implements OnInit, OnChanges {
   @Input() inputMarkers: Marker[];
   @Output() getCenterEmitter: EventEmitter<EarthInteractions> = new EventEmitter();
   @Output() selectedMarker: EventEmitter<Marker> = new EventEmitter();
+  @Output() selectedOutside: EventEmitter<boolean> = new EventEmitter();
   earth: any;
   webGL: any;
   activeMarkers: any[] = [];
@@ -44,7 +45,9 @@ export class GlobeViewComponent implements OnInit, OnChanges {
     this.earthContainer.nativeElement.addEventListener('touchend', (event: Event) => this.interactions.next(event));
 
     // // click listener
-    this.earthContainer.nativeElement.addEventListener('click', (event: Event) => this.interactions.next(event));
+    this.earthContainer.nativeElement.addEventListener('click', (event: Event) => {
+      this.selectedOutside.emit(true);
+    });
   }
 
   async ngOnChanges(changes: SimpleChanges) {
@@ -126,6 +129,8 @@ export class GlobeViewComponent implements OnInit, OnChanges {
     // markerObj.bindPopup(`<b>${marker.title}</b>`);
     // Call back function on marker
     markerObj.on('click', (event) => {
+      // Necessary to determine when user clicks outside of marker
+      event.stopPropagation();
       this.selectedMarker.emit(marker);
     });
     // Add to internal list of markers
