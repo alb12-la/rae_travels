@@ -1,3 +1,39 @@
-<p>
-  detail-view works!
-</p>
+<div *ngIf="marker" class="p-5">
+  <!-- Title -->
+  <h1 class="display-4">{{marker.title}}</h1>
+  <!-- Featured Image -->
+  <div class="container justify-content-center">
+    <!-- <img *ngIf= [src]="content.url" class="rounded w-100 my-2" alt="..."> -->
+  </div>
+  <!-- Description -->
+  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention
+    to
+    featured content or information.</p>
+  <hr class="my-4">
+
+  <!-- Additional content-->
+
+  <div class="container justify-content-center">
+    <div *ngIf="marker.associatedContent">
+      <ng-container *ngFor="let content of marker.associatedContent">
+
+        <!-- Images -->
+        <img [src]="content.url" class="rounded w-100 my-2" alt="...">
+
+        <!-- content text -->
+        <div class="card my-5" style="font-style: italic; font-size: 2rem">
+          <div class="card-body display-4" style="font-size: 2rem">
+            One said to me tonight or was it day
+            or was it the passage between the two,
+            "It's hard to remember, crossing time zones,
+            <br>
+            the structure of the hours you left behind.
+            Are they sleeping or are they eating sweets,
+            and are they wanting me to phone them now?"
+          </div>
+        </div>
+
+      </ng-container>
+    </div>
+  </div>
+</div>

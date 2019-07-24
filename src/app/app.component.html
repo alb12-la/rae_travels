@@ -34,49 +34,14 @@
 </div>
 
 <div class="slide-out-container">
-    <div id="slide-out-controls" class="w-100 d-flex justify-content-center">
-        <!-- <a class="btn btn-primary m-2" (click)="this.placeMarkers()">News</a>
-        <a class="btn btn-secondary m-2" (click)="this.toggleActivities()">Activities</a> -->
-    </div>
     <!-- Pop out container-->
     <div [ngClass]="['slide-out overflow-auto ', showActivities ? 'expand':'']">
+        <!-- exit button -->
         <div class="exit-slide-out font-weight-bold" (click)="toggleActivities()">x</div>
-        <div *ngIf="this.selectedMarker" class="jumbotron">
-            <h1 class="display-4">{{this.selectedMarker.title}}</h1>
-
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention
-                to
-                featured content or information.</p>
-            <hr class="my-4">
-
-            <div class="container justify-content-center">
-                <div *ngIf="this.selectedMarker.associatedContent">
-                    <ng-container *ngFor="let content of this.selectedMarker.associatedContent">
-                        <img [src]="content.url" class="rounded w-100 my-2" alt="...">
-                    </ng-container>
-                </div>
-
-                <div class="card my-5" style="font-style: italic; font-size: 2rem">
-                    <div class="card-body display-4" style="font-size: 2rem">
-                        One said to me tonight or was it day
-                        or was it the passage between the two,
-                        "It's hard to remember, crossing time zones,
-                        <br>
-                        the structure of the hours you left behind.
-                        Are they sleeping or are they eating sweets,
-                        and are they wanting me to phone them now?"
-                    </div>
-                </div>
-
-
-
-            </div>
-
-        </div>
+        <!-- Detail view -->
+        <app-detail-view *ngIf="this.selectedMarker" [marker]="selectedMarker"></app-detail-view>
     </div>
 </div>
-
-
 
 <app-globe-view (selectedMarker)="selectMarker($event)" (getCenterEmitter)="this.updateCenterLocation($event)"
     [inputMarkers]="markers"></app-globe-view>
