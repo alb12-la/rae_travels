@@ -27,7 +27,8 @@ export class AppComponent implements OnInit {
     48.684820,
     -123.213830,
     'Cattle Point Lighthouse',
-    '../assets/markers/cattle-point-lighthouse-marker.png'
+    '../assets/markers/cattle-point-lighthouse-marker.png',
+    [new Content(ContentType.TEXT, null, 'This is a poem')],
   );
 
   loc2: Marker = {
@@ -65,7 +66,7 @@ export class AppComponent implements OnInit {
     icon: '../assets/markers/barcelona-marker.png',
     iconWidth: 100,
     iconHeight: 100,
-    associatedContent: [this.barcelonaContent1, this.barcelonaContent2]
+    associatedContent: [this.barcelonaContent1, this.barcelonaContent2, new Content(ContentType.TEXT, null, 'Beautiful time in Barcelona')]
   };
 
   loc5: Marker = {

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Marker } from '../shared-classes';
+import { Marker, ContentType } from '../shared-classes';
 
 @Component({
   selector: 'app-detail-view',
@@ -7,6 +7,7 @@ import { Marker } from '../shared-classes';
 })
 export class DetailViewComponent implements OnInit {
   @Input() marker: Marker;
+  ContentType = ContentType;
 
   constructor() { }
 

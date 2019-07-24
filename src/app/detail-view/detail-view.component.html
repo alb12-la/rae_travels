@@ -17,21 +17,23 @@
     <div *ngIf="marker.associatedContent">
       <ng-container *ngFor="let content of marker.associatedContent">
 
-        <!-- Images -->
-        <img [src]="content.url" class="rounded w-100 my-2" alt="...">
+        <!-- VIEW BASED ON CONTENT -->
+        <ng-container [ngSwitch]="content.type">
+          <!-- IMAGE -->
+          <img *ngSwitchCase="ContentType.IMAGE" [src]="content.url" class="rounded w-100 my-2" alt="...">
+
+          <!-- TEXT / POEM  -->
+          <div *ngSwitchCase="ContentType.TEXT" class="card my-5" style="font-style: italic; font-size: 2rem">
+            <div class="card-body display-4" style="font-size: 2rem">
+              {{content.body}}
+            </div>
+          </div>
+
+        </ng-container>
+
 
         <!-- content text -->
-        <div class="card my-5" style="font-style: italic; font-size: 2rem">
-          <div class="card-body display-4" style="font-size: 2rem">
-            One said to me tonight or was it day
-            or was it the passage between the two,
-            "It's hard to remember, crossing time zones,
-            <br>
-            the structure of the hours you left behind.
-            Are they sleeping or are they eating sweets,
-            and are they wanting me to phone them now?"
-          </div>
-        </div>
+
 
       </ng-container>
     </div>
