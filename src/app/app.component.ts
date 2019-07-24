@@ -10,7 +10,7 @@ import { RestHelperService } from './services/rest-helper.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  displayCrosshairs = true;
+  displayCrosshairs = false;
   currentPosition = undefined;
   currentMapBoundaries = undefined;
   showActivities = false;
@@ -107,7 +107,7 @@ export class AppComponent implements OnInit {
     this.selectedMarker = marker;
     this.showActivities = true;
 
-    console.log('updated marker to', marker)
+    console.log('updated marker to', marker);
   }
 
   async updateCenterLocation(centerObj: EarthInteractions) {

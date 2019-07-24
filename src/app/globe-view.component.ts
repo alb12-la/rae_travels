@@ -68,13 +68,19 @@ export class GlobeViewComponent implements OnInit, OnChanges {
     console.log('Initializing Earth');
 
     // Earth
-    const earth = new WE.map('earth_div');
+    const earth = new WE.map('earth_div',
+      {
+        center: [36.057944835, -112.18688965],
+        zoom: 4,
+        maxAltitude: 15000000
+      });
     this.earth = earth;
     console.log('Earth', this.earth);
 
     // WEBGL
     this.webGL = WE;
-    WE.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(earth);
+    this.webGL.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(earth);
+
     console.log('webGL', this.webGL);
   }
 
