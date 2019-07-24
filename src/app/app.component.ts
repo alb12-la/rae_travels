@@ -49,25 +49,18 @@ export class AppComponent implements OnInit {
     iconHeight: 100
   };
 
-  barcelonaContent1: Content = {
-    type: ContentType.IMAGE,
-    url: '../assets/images/barcelona1.jpg'
-  };
-
-  barcelonaContent2: Content = {
-    type: ContentType.IMAGE,
-    url: '../assets/images/barcelona2.jpg'
-  };
-
-  loc4: Marker = {
-    latitude: 41.403191,
-    longitude: 2.174840,
-    title: 'Barcelona',
-    icon: '../assets/markers/barcelona-marker.png',
-    iconWidth: 100,
-    iconHeight: 100,
-    associatedContent: [this.barcelonaContent1, this.barcelonaContent2, new Content(ContentType.TEXT, null, 'Beautiful time in Barcelona')]
-  };
+  loc4 = new Marker(
+    41.403191, 2.174840,
+    'Barcelona',
+    '../assets/markers/barcelona-marker.png',
+    [
+      new Content(ContentType.IMAGE, '../assets/images/barcelona2.jpg'),
+      new Content(ContentType.TEXT, null, 'Beautiful time in Barcelona')
+    ],
+    'Barcelona is an amazing place',
+    '10/20/08',
+    '../assets/images/barcelona-featured.jpg'
+  );
 
   loc5: Marker = {
     latitude: 36.172501,
@@ -78,6 +71,67 @@ export class AppComponent implements OnInit {
     iconHeight: 100
   };
 
+  loc6: Marker = new Marker(
+    52.370216,
+    4.895168,
+    'Amsterdam',
+    '../assets/markers/amsterdam-marker.png',
+    [],
+    'Amsterdam is the city of dreams',
+    '01/20/2019',
+    '../assets/images/amsterdam-featured.jpg'
+  );
+
+  loc7: Marker = new Marker(
+    9.909580,
+    -84.054060,
+    'San Jose Cost Rica',
+    '../assets/markers/costa-rica-marker.png',
+    [],
+    'Costa Rica is the city of dreams',
+    '01/20/2019',
+    '../assets/images/costa-rica-featured.jpg'
+  );
+
+  loc8: Marker = new Marker(
+    41.882107,
+    -87.622955,
+    'Cloud Gate, Chicago',
+    '../assets/markers/chicago-marker.png',
+    [],
+    'Chicago is the city of dreams',
+    '01/20/2019',
+    '../assets/images/chicago-featured.jpg'
+  );
+
+  loc9: Marker = new Marker(
+    13.756331,
+    100.501762,
+    'Bangkok, Thailand',
+    '../assets/markers/bangkok-marker.png',
+    [
+      new Content(ContentType.IMAGE, '../assets/images/thailand-1.jpg'),
+      new Content(ContentType.IMAGE, '../assets/images/thailand-2.jpg')
+    ],
+    'Bangkok is the city of dreams',
+    '01/20/2019',
+    '../assets/images/thailand-featured.jpg'
+  );
+
+  loc10: Marker = new Marker(
+    45.512230,
+    -122.658722,
+    'Portland, Oregon',
+    '../assets/markers/portland-marker.png',
+    [
+      new Content(ContentType.IMAGE, '../assets/images/portland-1.jpg')
+    ],
+    'Portland is the city of dreams',
+    '01/20/2019',
+    '../assets/images/portland-featured.jpg'
+  );
+
+
   ngOnInit() {
     // Prevent `pinch to zoom` on mobile devices;
     document.addEventListener('gesturechange', (event: Event) => {
@@ -87,7 +141,7 @@ export class AppComponent implements OnInit {
   }
 
   placeMarkers() {
-    this.markers = [this.loc1, this.loc2, this.loc3, this.loc4, this.loc5];
+    this.markers = [this.loc1, this.loc2, this.loc3, this.loc4, this.loc5, this.loc6, this.loc7, this.loc8, this.loc9, this.loc10];
   }
 
   toggleActivities() {

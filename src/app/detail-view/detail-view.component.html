@@ -1,18 +1,19 @@
 <div *ngIf="marker" class="p-5">
   <!-- Title -->
   <h1 class="display-4">{{marker.title}}</h1>
+
+  <!-- Date -->
+  <p *ngIf="marker.date">{{marker.date}}</p>
+
+  <!-- Description -->
+  <p *ngIf="marker.description" class="lead">{{marker.description}}</p>
+
   <!-- Featured Image -->
   <div class="container justify-content-center">
-    <!-- <img *ngIf= [src]="content.url" class="rounded w-100 my-2" alt="..."> -->
+    <img *ngIf="marker.featuredImage" [src]="marker.featuredImage" class="rounded w-100 my-2" alt="...">
   </div>
-  <!-- Description -->
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention
-    to
-    featured content or information.</p>
-  <hr class="my-4">
 
   <!-- Additional content-->
-
   <div class="container justify-content-center">
     <div *ngIf="marker.associatedContent">
       <ng-container *ngFor="let content of marker.associatedContent">

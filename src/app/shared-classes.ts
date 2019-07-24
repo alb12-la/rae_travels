@@ -5,6 +5,9 @@ export class Marker {
         public title: string,
         public icon: string,
         public associatedContent?: Content[],
+        public description?: string,
+        public date?: string,
+        public featuredImage?: string,
         public iconHeight = 100,
         public iconWidth = 100,
     ) { }
