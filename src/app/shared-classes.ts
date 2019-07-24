@@ -4,16 +4,23 @@ export class Marker {
         public longitude: number,
         public title: string,
         public icon: string,
-        public iconWidth: number,
-        public iconHeight: number,
-        public associatedContent?: Content[]
+        public associatedContent?: Content[],
+        public iconHeight = 100,
+        public iconWidth = 100,
     ) { }
+}
+
+export enum ContentType {
+    IMAGE = 'IMAGE',
+    TEXT = 'TEXT',
+    INSTAGRAM_POST = 'INSTAGRAM_POST'
 }
 
 export class Content {
     constructor(
-        public type: string,
-        public url: string
+        public type: ContentType,
+        public url: string,
+        public body?: string
     ) { }
 }
 

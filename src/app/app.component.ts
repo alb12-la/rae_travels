@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Marker, EarthInteractions, Coordinates, CoordinateBoundaries, Address, Content } from './shared-classes';
+import { Marker, EarthInteractions, Coordinates, CoordinateBoundaries, Address, Content, ContentType } from './shared-classes';
 import { RestHelperService } from './services/rest-helper.service';
 
 
@@ -23,14 +23,12 @@ export class AppComponent implements OnInit {
   ) { }
 
   // Mock data
-  loc1: Marker = {
-    latitude: 48.684820,
-    longitude: -123.213830,
-    title: 'Cattle Point Lighthouse',
-    icon: '../assets/markers/cattle-point-lighthouse-marker.png',
-    iconWidth: 100,
-    iconHeight: 100
-  };
+  loc1: Marker = new Marker(
+    48.684820,
+    -123.213830,
+    'Cattle Point Lighthouse',
+    '../assets/markers/cattle-point-lighthouse-marker.png'
+  );
 
   loc2: Marker = {
     latitude: 32.752310,
@@ -51,12 +49,12 @@ export class AppComponent implements OnInit {
   };
 
   barcelonaContent1: Content = {
-    type: 'img',
+    type: ContentType.IMAGE,
     url: '../assets/images/barcelona1.jpg'
   };
 
   barcelonaContent2: Content = {
-    type: 'img',
+    type: ContentType.IMAGE,
     url: '../assets/images/barcelona2.jpg'
   };
 
