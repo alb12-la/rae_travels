@@ -30,7 +30,18 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<html>\n<div id=\"debug-panel\">\n    <!-- Debugging panel -->\n    <!-- <div class=\"card position-fixed\">\n        <div class=\"card-body\">\n            <div class=\"form-group\">\n                <ng-container *ngIf=\"this.currentAddress\">\n                    <label class=\"mt-2\">Address</label>\n                    <h3 class=\"form-text\">\n                        {{this.currentAddress.country}},{{this.currentAddress.city}},{{this.currentAddress.street}}\n                    </h3>\n                </ng-container>\n\n                <ng-container *ngIf=\"this.currentPosition else emptyState\">\n                    <label class=\"mt-2\">Coordinates</label>\n                    <h3 class=\"form-text\">\n                        {{this.currentPosition.latitude}},{{this.currentPosition.longitude}}\n                    </h3>\n                </ng-container>\n                <ng-template #emptyState>\n                    You're too far away! Zoom in closer.\n                </ng-template>\n            </div>\n        </div>\n    </div> -->\n\n\n\n    <!-- Crosshairs -->\n    <div [ngClass]=\"[displayCrosshairs ? '': 'd-none']\">\n        <div class=\"v-line\"></div>\n        <div class=\"h-line\"></div>\n    </div>\n</div>\n\n<div class=\"slide-out-container\">\n    <div id=\"slide-out-controls\" class=\"w-100 d-flex justify-content-center\">\n        <!-- <a class=\"btn btn-primary m-2\" (click)=\"this.placeMarkers()\">News</a>\n        <a class=\"btn btn-secondary m-2\" (click)=\"this.toggleActivities()\">Activities</a> -->\n    </div>\n    <!-- Pop out container-->\n    <div [ngClass]=\"['slide-out overflow-auto ', showActivities ? 'expand':'']\">\n        <div class=\"exit-slide-out font-weight-bold\" (click)=\"toggleActivities()\">x</div>\n        <div *ngIf=\"this.selectedMarker\" class=\"jumbotron\">\n            <h1 class=\"display-4\">{{this.selectedMarker.title}}</h1>\n\n            <p class=\"lead\">This is a simple hero unit, a simple jumbotron-style component for calling extra attention\n                to\n                featured content or information.</p>\n            <hr class=\"my-4\">\n\n            <div *ngIf=\"this.selectedMarker.associatedContent\">\n                <ng-container *ngFor=\"let content of this.selectedMarker.associatedContent\">\n                    <img [src]=\"content.url\" class=\"rounded w-100 m-2\" alt=\"...\">\n                </ng-container>\n            </div>\n        </div>\n    </div>\n</div>\n\n\n\n<app-globe-view (selectedMarker)=\"selectMarker($event)\" (getCenterEmitter)=\"this.updateCenterLocation($event)\"\n    [inputMarkers]=\"markers\"></app-globe-view>\n\n</html>\n<router-outlet>\n</router-outlet>"
+module.exports = "<html>\n\n<div class=\"card bg-transparent border-0 text-white position-absolute\" style=\"pointer-events: none;\">\n    <div class=\"card-body\">\n        <h1 class=\"display-1 cursive-font\">Rae's Travels</h1>\n        <p class=\"card-text\">Interact with the globe! No really, Get out there!</p>\n    </div>\n</div>\n\n<div id=\"debug-panel\">\n    <!-- Debugging panel -->\n    <!-- <div class=\"card position-fixed\">\n        <div class=\"card-body\">\n            <div class=\"form-group\">\n                <ng-container *ngIf=\"this.currentAddress\">\n                    <label class=\"mt-2\">Address</label>\n                    <h3 class=\"form-text\">\n                        {{this.currentAddress.country}},{{this.currentAddress.city}},{{this.currentAddress.street}}\n                    </h3>\n                </ng-container>\n\n                <ng-container *ngIf=\"this.currentPosition else emptyState\">\n                    <label class=\"mt-2\">Coordinates</label>\n                    <h3 class=\"form-text\">\n                        {{this.currentPosition.latitude}},{{this.currentPosition.longitude}}\n                    </h3>\n                </ng-container>\n                <ng-template #emptyState>\n                    You're too far away! Zoom in closer.\n                </ng-template>\n            </div>\n        </div>\n    </div> -->\n\n\n\n    <!-- Crosshairs -->\n    <div [ngClass]=\"[displayCrosshairs ? '': 'd-none']\">\n        <div class=\"v-line\"></div>\n        <div class=\"h-line\"></div>\n    </div>\n</div>\n\n<div class=\"slide-out-container\">\n    <!-- Pop out container-->\n    <div [ngClass]=\"['slide-out overflow-auto ', showActivities ? 'expand':'']\">\n        <!-- exit button -->\n        <div class=\"exit-slide-out font-weight-bold\" (click)=\"toggleActivities()\">x</div>\n        <!-- Detail view -->\n        <app-detail-view *ngIf=\"this.selectedMarker\" [marker]=\"selectedMarker\"></app-detail-view>\n    </div>\n</div>\n\n<app-globe-view (selectedMarker)=\"selectMarker($event)\" (selectedOutside)=\"deSelectMarker()\" [inputMarkers]=\"markers\">\n</app-globe-view>\n\n</html>\n<router-outlet>\n</router-outlet>"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/detail-view/detail-view.component.html":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/detail-view/detail-view.component.html ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngIf=\"marker\" class=\"p-5\">\n  <!-- Title -->\n  <h1 class=\"display-4\">{{marker.title}}</h1>\n\n  <!-- Date -->\n  <p *ngIf=\"marker.date\">{{marker.date}}</p>\n\n  <!-- Description -->\n  <p *ngIf=\"marker.description\" class=\"lead\">{{marker.description}}</p>\n\n  <!-- Featured Image -->\n  <div class=\"container justify-content-center\">\n    <img *ngIf=\"marker.featuredImage\" [src]=\"marker.featuredImage\" class=\"rounded w-100 my-2\" alt=\"...\">\n  </div>\n\n  <!-- Additional content-->\n  <div class=\"container justify-content-center\">\n    <div *ngIf=\"marker.associatedContent\">\n      <ng-container *ngFor=\"let content of marker.associatedContent\">\n\n        <!-- VIEW BASED ON CONTENT -->\n        <ng-container [ngSwitch]=\"content.type\">\n          <!-- IMAGE -->\n          <div *ngSwitchCase=\"ContentType.IMAGE\" class=\"card my-2\">\n            <img [src]=\"content.url\" class=\"card-img-top\" alt=\"...\">\n\n            <div *ngIf=\"content.body\" class=\"card-body\">\n              <p class=\"card-text\">{{content.body}}</p>\n            </div>\n          </div>\n\n          <!-- TEXT / POEM  -->\n          <div *ngSwitchCase=\"ContentType.TEXT\" class=\"card my-5\" style=\"font-style: italic; font-size: 2rem\">\n            <div class=\"card-body display-4\" style=\"font-size: 2rem\">\n              {{content.body}}\n            </div>\n          </div>\n\n        </ng-container>\n        <!-- content text -->\n      </ng-container>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -110,62 +121,57 @@ __webpack_require__.r(__webpack_exports__);
 var AppComponent = /** @class */ (function () {
     function AppComponent(restHelperService) {
         this.restHelperService = restHelperService;
-        this.displayCrosshairs = true;
+        this.displayCrosshairs = false;
         this.currentPosition = undefined;
         this.currentMapBoundaries = undefined;
         this.showActivities = false;
         this.markers = [];
         this.currentAddress = undefined;
         // Mock data
-        this.loc1 = {
-            latitude: 48.684820,
-            longitude: -123.213830,
-            title: 'Cattle Point Lighthouse',
-            icon: '../assets/markers/cattle-point-lighthouse-marker.png',
-            iconWidth: 100,
-            iconHeight: 100
-        };
-        this.loc2 = {
-            latitude: 32.752310,
-            longitude: -117.194640,
-            title: 'Old Town, San Diego',
-            icon: '../assets/markers/san-diego-marker.png',
-            iconWidth: 100,
-            iconHeight: 100
-        };
-        this.loc3 = {
-            latitude: 35.417440,
-            longitude: -113.042250,
-            title: 'Copper Cart, Rte 66',
-            icon: '../assets/markers/route-66-marker.png',
-            iconWidth: 100,
-            iconHeight: 100
-        };
-        this.barcelonaContent1 = {
-            type: 'img',
-            url: '../assets/images/barcelona1.jpg'
-        };
-        this.barcelonaContent2 = {
-            type: 'img',
-            url: '../assets/images/barcelona2.jpg'
-        };
-        this.loc4 = {
-            latitude: 41.403191,
-            longitude: 2.174840,
-            title: 'Barcelona',
-            icon: '../assets/markers/barcelona-marker.png',
-            iconWidth: 100,
-            iconHeight: 100,
-            associatedContent: [this.barcelonaContent1, this.barcelonaContent2]
-        };
-        this.loc5 = {
-            latitude: 36.172501,
-            longitude: -115.144508,
-            title: 'Hotel California',
-            icon: '../assets/markers/vegas-marker.png',
-            iconWidth: 100,
-            iconHeight: 100
-        };
+        this.loc1 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](48.684820, -123.213830, 'Cattle Point Lighthouse', '../assets/markers/cattle-point-lighthouse-marker.png', [
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/cattle-point-lighthouse-2.jpg'),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/cattle-point-lighthouse.jpg'),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/cattle-point-lighthouse-3.jpg'),
+        ], "Cattle Point Lighthouse\u00A0is a\u00A0lighthouse\u00A0on the southeastern tip of\u00A0San Juan Island\u00A0overlooking\n     the\u00A0Strait of Juan de Fuca\u00A0where the\u00A0Haro Straits\u00A0meet the San Juan Channel, in\u00A0San Juan County,\u00A0\n     Washington. The light lies adjacent to the state's Cattle Point Natural Resources Conservation Area\n     and, as of 2013, is part of the\u00A0San Juan Islands National Monument.", 'Winter 2018');
+        this.loc2 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](32.752310, -117.194640, 'San Diego, California', '../assets/markers/san-diego-marker.png', [
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/san-diego-featured.jpg'),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/san-diego-3.jpg', 'The beautiful scenery here makes time stand still.'),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/san-diego-1.jpg'),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/san-diego-2.jpg', 'Beautiful flamingos.'),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/san-diego-4.jpg', 'Giant Tortoise older than my parents.'),
+        ], "California just keeps surprising me with how beautiful it's cities are.\n     A weekend in San Diego is all you need to get you feeling like you just came back from a great summer vacation.\n     We got to visit the San Diego zoo, which apparently has received numerous\n     awards for its exhibits, programs, and reproduction and conservation efforts. ", 'Summer 2019');
+        this.loc4 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](41.403191, 2.174840, 'Barcelona, Spain', '../assets/markers/barcelona-marker.png', [
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/barcelona-7.jpg', 'Pan con Tomate!'),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/barcelona-3.jpg'),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/barcelona-5.jpg', 'Plaza de España! '),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/barcelona-6.jpg', 'So much beautiful architecture.'),
+        ], "Barcelona can be summed up as a week of non-stop eating and walking.\n     Within the span of one day we'd average about 30 miles of walking and about 6 small meals throughout the day.", 'Spring 2019', '../assets/images/barcelona-featured.jpg');
+        this.loc5 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](36.172501, -115.144508, 'Las Vegas, Nevada', '../assets/markers/vegas-marker.png', [
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/las-vegas-2.jpg', 'Tryna stay out of the scorching sun. '),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/hoover-dam-1.jpg', 'What a neat dam.'),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/hoover-dam-2.jpg', 'Mingling with some desert locals on route 66'),
+        ], "First time going to vegas as an adult and I gotta say, I now understand the hype around a playground for adults.\n    Though a little to decadent for my taste, its fun to see all the kinds entertainment available to someone with a pocket full of cash. \n    We evened out the decadence by taking a tour bus from Vegas to the Grand Canyon", 'Summer 2019', '../assets/images/las-vegas-1.jpg');
+        this.loc7 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](9.909580, -84.054060, 'San Jose Cost Rica', '../assets/markers/costa-rica-marker.png', [
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, 'assets/images/costa-rica-1.jpg'),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, 'assets/images/costa-rica-2.jpg'),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, 'assets/images/costa-rica-3.jpg'),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, 'assets/images/costa-rica-4.jpg', 'MOUTH OF A VOLCANO, how dope is that?'),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, 'assets/images/costa-rica-5.jpg')
+        ], "If I could summarize Costa Rica in one word, it\u2019d be adventure. \n    In my one month there I hiked volcanos, danced on boats and zip lined \n    through the rain forest. I celebrated the fourth of July with illegal \n    fireworks and taught a bar full of people how to \u2018Wobble\u2019. I sang karaoke \n    at the top my lungs while arguing with misplaced Texans and remained \n    completely enamored with the peaceful culture of the Ticas. ", 'Spring 2012', '../assets/images/costa-rica-featured.jpg');
+        this.loc8 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](41.882107, -87.622955, 'Cloud Gate, Chicago', '../assets/markers/chicago-marker.png', [], "No one ever talks about how beautiful Chicago is at night, especially\n     when you\u2019re kayaking down the river and between the breweries. \n    No one ever talks about the art hidden throughout downtown or the\n    underground tunnels that lead to some of the best Speakeasies in the country.\n    No one ever talks about Chicago\u2019s elaborate park and rec spaces nor the electric\n    energy that pulses through the city on perfect spring days as people crowd around\n    free outdoor concerts.   They\u2019re keeping Chicago a secret. ", 'Spring 2014', '../assets/images/chicago-featured.jpg');
+        this.loc9 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](13.756331, 100.501762, 'Bangkok, Thailand', '../assets/markers/bangkok-marker.png', [
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/thailand-1.jpg'),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/thailand-2.jpg')
+        ], "I knew Thailand for a week yet still cannot tell you who she is.\n     Cool evenings are spent on rooftops and hot days on crystal beaches.\n     You can trek through the jungle on a Tuesday to bathe an elephant and\n     still make it back for a series of massages by nightfall. I balanced\n     on the head of a small boat just to catch the moonrise over the ocean\n     and gambled with the locals during Muay Thai matches.\n     A choose your own adventure track like none other.\n\n    Oh, and there were also elephants.", 'Winter 2018', '../assets/images/thailand-featured.jpg');
+        this.loc10 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](45.512230, -122.658722, 'Portland, Oregon', '../assets/markers/portland-marker.png', [
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/portland-1.jpg')
+        ], 'Portland is the city of dreams', '01/20/2019', '../assets/images/portland-featured.jpg');
+        this.loc11 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](25.512230, -122.658722, 'Rome, Italy', '../assets/markers/portland-marker.png', [
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/portland-1.jpg')
+        ], "Trevi Fountain, the Sistine Chapel, the Vatican. I was amazed then\n    , nearly then years ago stepping my first foot in Europe, Rome, the past.\n    I can only imagine how I\u2019ll feel when I finally go back. Whose history will I be traipsing in? My own?", '01/20/2019', '../assets/images/portland-featured.jpg');
+        this.loc12 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](49.512230, -122.658722, 'Capri Island', '../assets/markers/portland-marker.png', [
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/portland-1.jpg')
+        ], "I left the country for the first time in 2009 and on that trip I visited\n     what I still believe is the most beautiful place I\u2019ve ever seen. I told\n      myself I\u2019d retire there or even bring someone to share it with. I mean look,\n       I even took a great photo with a digital camera from 2009, models\n       don\u2019t even photograph this well.", 'Summer 2009', '../assets/images/portland-featured.jpg');
     }
     AppComponent.prototype.ngOnInit = function () {
         // Prevent `pinch to zoom` on mobile devices;
@@ -175,7 +181,7 @@ var AppComponent = /** @class */ (function () {
         this.placeMarkers();
     };
     AppComponent.prototype.placeMarkers = function () {
-        this.markers = [this.loc1, this.loc2, this.loc3, this.loc4, this.loc5];
+        this.markers = [this.loc1, this.loc2, this.loc4, this.loc5, this.loc7, this.loc9];
     };
     AppComponent.prototype.toggleActivities = function () {
         this.showActivities = !this.showActivities;
@@ -190,6 +196,10 @@ var AppComponent = /** @class */ (function () {
         this.selectedMarker = marker;
         this.showActivities = true;
         console.log('updated marker to', marker);
+    };
+    AppComponent.prototype.deSelectMarker = function () {
+        this.selectedMarker = undefined;
+        this.showActivities = false;
     };
     AppComponent.prototype.updateCenterLocation = function (centerObj) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
@@ -244,6 +254,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _globe_view_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./globe-view.component */ "./src/app/globe-view.component.ts");
+/* harmony import */ var _detail_view_detail_view_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./detail-view/detail-view.component */ "./src/app/detail-view/detail-view.component.ts");
+
 
 
 
@@ -258,7 +270,8 @@ var AppModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"],
-                _globe_view_component__WEBPACK_IMPORTED_MODULE_6__["GlobeViewComponent"]
+                _globe_view_component__WEBPACK_IMPORTED_MODULE_6__["GlobeViewComponent"],
+                _detail_view_detail_view_component__WEBPACK_IMPORTED_MODULE_7__["DetailViewComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -270,6 +283,46 @@ var AppModule = /** @class */ (function () {
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/detail-view/detail-view.component.ts":
+/*!******************************************************!*\
+  !*** ./src/app/detail-view/detail-view.component.ts ***!
+  \******************************************************/
+/*! exports provided: DetailViewComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DetailViewComponent", function() { return DetailViewComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _shared_classes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared-classes */ "./src/app/shared-classes.ts");
+
+
+
+var DetailViewComponent = /** @class */ (function () {
+    function DetailViewComponent() {
+        this.ContentType = _shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"];
+    }
+    DetailViewComponent.prototype.ngOnInit = function () {
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"])
+    ], DetailViewComponent.prototype, "marker", void 0);
+    DetailViewComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-detail-view',
+            template: __webpack_require__(/*! raw-loader!./detail-view.component.html */ "./node_modules/raw-loader/index.js!./src/app/detail-view/detail-view.component.html"),
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], DetailViewComponent);
+    return DetailViewComponent;
 }());
 
 
@@ -300,6 +353,7 @@ var GlobeViewComponent = /** @class */ (function () {
     function GlobeViewComponent() {
         this.getCenterEmitter = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.selectedMarker = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        this.selectedOutside = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.activeMarkers = [];
         this.interactions = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
     }
@@ -316,7 +370,9 @@ var GlobeViewComponent = /** @class */ (function () {
                 // // touch device listener
                 this.earthContainer.nativeElement.addEventListener('touchend', function (event) { return _this.interactions.next(event); });
                 // // click listener
-                this.earthContainer.nativeElement.addEventListener('click', function (event) { return _this.interactions.next(event); });
+                this.earthContainer.nativeElement.addEventListener('click', function (event) {
+                    _this.selectedOutside.emit(true);
+                });
                 return [2 /*return*/];
             });
         });
@@ -353,12 +409,16 @@ var GlobeViewComponent = /** @class */ (function () {
             var earth;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 console.log('Initializing Earth');
-                earth = new WE.map('earth_div');
+                earth = new WE.map('earth_div', {
+                    center: [36.057944835, -112.18688965],
+                    zoom: 4,
+                    maxAltitude: 15000000
+                });
                 this.earth = earth;
                 console.log('Earth', this.earth);
                 // WEBGL
                 this.webGL = WE;
-                WE.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(earth);
+                this.webGL.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(earth);
                 console.log('webGL', this.webGL);
                 return [2 /*return*/];
             });
@@ -396,6 +456,8 @@ var GlobeViewComponent = /** @class */ (function () {
         // markerObj.bindPopup(`<b>${marker.title}</b>`);
         // Call back function on marker
         markerObj.on('click', function (event) {
+            // Necessary to determine when user clicks outside of marker
+            event.stopPropagation();
             _this.selectedMarker.emit(marker);
         });
         // Add to internal list of markers
@@ -423,6 +485,10 @@ var GlobeViewComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"])
     ], GlobeViewComponent.prototype, "selectedMarker", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"])
+    ], GlobeViewComponent.prototype, "selectedOutside", void 0);
     GlobeViewComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-globe-view',
@@ -512,34 +578,47 @@ var RestHelperService = /** @class */ (function () {
 /*!***********************************!*\
   !*** ./src/app/shared-classes.ts ***!
   \***********************************/
-/*! exports provided: Marker, Content, Coordinates, CoordinateBoundaries, EarthInteractions, Address */
+/*! exports provided: Marker, ContentType, Content, Coordinates, CoordinateBoundaries, EarthInteractions, Address */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Marker", function() { return Marker; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContentType", function() { return ContentType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Content", function() { return Content; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Coordinates", function() { return Coordinates; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CoordinateBoundaries", function() { return CoordinateBoundaries; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EarthInteractions", function() { return EarthInteractions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Address", function() { return Address; });
 var Marker = /** @class */ (function () {
-    function Marker(latitude, longitude, title, icon, iconWidth, iconHeight, associatedContent) {
+    function Marker(latitude, longitude, title, icon, associatedContent, description, date, featuredImage, iconHeight, iconWidth) {
+        if (iconHeight === void 0) { iconHeight = 100; }
+        if (iconWidth === void 0) { iconWidth = 100; }
         this.latitude = latitude;
         this.longitude = longitude;
         this.title = title;
         this.icon = icon;
-        this.iconWidth = iconWidth;
-        this.iconHeight = iconHeight;
         this.associatedContent = associatedContent;
+        this.description = description;
+        this.date = date;
+        this.featuredImage = featuredImage;
+        this.iconHeight = iconHeight;
+        this.iconWidth = iconWidth;
     }
     return Marker;
 }());
 
+var ContentType;
+(function (ContentType) {
+    ContentType["IMAGE"] = "IMAGE";
+    ContentType["TEXT"] = "TEXT";
+    ContentType["INSTAGRAM_POST"] = "INSTAGRAM_POST";
+})(ContentType || (ContentType = {}));
 var Content = /** @class */ (function () {
-    function Content(type, url) {
+    function Content(type, url, body) {
         this.type = type;
         this.url = url;
+        this.body = body;
     }
     return Content;
 }());
