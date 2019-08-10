@@ -21,7 +21,13 @@
         <!-- VIEW BASED ON CONTENT -->
         <ng-container [ngSwitch]="content.type">
           <!-- IMAGE -->
-          <img *ngSwitchCase="ContentType.IMAGE" [src]="content.url" class="rounded w-100 my-2" alt="...">
+          <div *ngSwitchCase="ContentType.IMAGE" class="card my-2">
+            <img [src]="content.url" class="card-img-top" alt="...">
+
+            <div *ngIf="content.body" class="card-body">
+              <p class="card-text">{{content.body}}</p>
+            </div>
+          </div>
 
           <!-- TEXT / POEM  -->
           <div *ngSwitchCase="ContentType.TEXT" class="card my-5" style="font-style: italic; font-size: 2rem">
@@ -31,11 +37,7 @@
           </div>
 
         </ng-container>
-
-
         <!-- content text -->
-
-
       </ng-container>
     </div>
   </div>

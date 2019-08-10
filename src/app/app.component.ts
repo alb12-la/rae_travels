@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
      the Strait of Juan de Fuca where the Haro Straits meet the San Juan Channel, in San Juan County, 
      Washington. The light lies adjacent to the state's Cattle Point Natural Resources Conservation Area
      and, as of 2013, is part of the San Juan Islands National Monument.`,
-    '10/11/2018'
+    'Winter 2018'
   );
 
   loc2: Marker = new Marker(
@@ -55,7 +55,8 @@ export class AppComponent implements OnInit {
     `California just keeps surprising me with how beautiful it's cities are.
      A weekend in San Diego is all you need to get you feeling like you just came back from a great summer vacation.
      We got to visit the San Diego zoo, which apparently has received numerous
-     awards for its exhibits, programs, and reproduction and conservation efforts. `
+     awards for its exhibits, programs, and reproduction and conservation efforts. `,
+    'Summer 2019'
   );
 
 
@@ -66,8 +67,8 @@ export class AppComponent implements OnInit {
     '../assets/markers/barcelona-marker.png',
     [
 
-      new Content(ContentType.IMAGE, '../assets/images/barcelona-7.jpg'),
-      new Content(ContentType.IMAGE, '../assets/images/barcelona-3.jpg', 'Pan con Tomate!'),
+      new Content(ContentType.IMAGE, '../assets/images/barcelona-7.jpg', 'Pan con Tomate!'),
+      new Content(ContentType.IMAGE, '../assets/images/barcelona-3.jpg'),
       new Content(ContentType.IMAGE, '../assets/images/barcelona-5.jpg', 'Plaza de España! '),
       new Content(ContentType.IMAGE, '../assets/images/barcelona-6.jpg', 'So much beautiful architecture.'),
     ],
@@ -151,7 +152,7 @@ export class AppComponent implements OnInit {
      A choose your own adventure track like none other.
 
     Oh, and there were also elephants.`,
-    'February 2018',
+    'Winter 2018',
     '../assets/images/thailand-featured.jpg'
   );
 
