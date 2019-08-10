@@ -210,7 +210,7 @@ export class AppComponent implements OnInit {
   }
 
   placeMarkers() {
-    this.markers = [this.loc1, this.loc2, this.loc4, this.loc5, this.loc7, this.loc9, this.loc10];
+    this.markers = [this.loc1, this.loc2, this.loc4, this.loc5, this.loc7, this.loc9];
   }
 
   toggleActivities() {
