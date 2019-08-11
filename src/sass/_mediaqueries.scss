@@ -4,7 +4,12 @@
 // Screen sizes ≥ 768px
 @include media-breakpoint-down(md) {
     #site-title {
-        display: none;
+        width: 100vw;
+        text-align: center;
+
+        .display-1 {
+            font-size: 2em;
+        }
     }
 }
 
