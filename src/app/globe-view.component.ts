@@ -74,7 +74,7 @@ export class GlobeViewComponent implements OnInit, OnChanges {
     const earth = new WE.map('earth_div',
       {
         center: [36.057944835, -112.18688965],
-        zoom: 4,
+        zoom: 3,
         maxAltitude: 15000000
       });
     this.earth = earth;

@@ -1,3 +1,6 @@
+@import 'sass/bootstrap/bootstrap.scss';
+
+
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 
@@ -84,3 +87,6 @@ body {
     transform: translate3d(-100%, 0, 0);
     animation-timing-function: 1s ease-in;
 }
+
+
+@import 'sass/mediaqueries';
