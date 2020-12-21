@@ -138,32 +138,32 @@ let AppComponent = class AppComponent {
             new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/san-diego-featured.jpg`),
             new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/san-diego-3.jpg`, 'The beautiful scenery here makes time stand still.'),
             new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/san-diego-1.jpg`),
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/san-diego-2.jpg', 'Beautiful flamingos.`),
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/san-diego-4.jpg', 'Giant Tortoise older than my parents.`),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/san-diego-2.jpg`, 'Beautiful flamingos.'),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/san-diego-4.jpg`, 'Giant Tortoise older than my parents.'),
         ], `California just keeps surprising me with how beautiful it's cities are.
      A weekend in San Diego is all you need to get you feeling like you just came back from a great summer vacation.
      We got to visit the San Diego zoo, which apparently has received numerous
      awards for its exhibits, programs, and reproduction and conservation efforts. `, 'Summer 2019');
         this.loc4 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](41.403191, 2.174840, 'Barcelona, Spain', `${this.baseRoot}/assets/markers/barcelona-marker.png`, [
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/barcelona-7.jpg', 'Pan con Tomate!`),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/barcelona-7.jpg`, 'Pan con Tomate!'),
             new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/barcelona-3.jpg`),
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/barcelona-5.jpg', 'Plaza de España! `),
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/barcelona-6.jpg', 'So much beautiful architecture.`),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/barcelona-5.jpg`, 'Plaza de España! '),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/barcelona-6.jpg`, 'So much beautiful architecture.'),
         ], `Barcelona can be summed up as a week of non-stop eating and walking.
      Within the span of one day we\'d average about 30 miles of walking and about 6 small meals throughout the day.`, 'Spring 2019', `${this.baseRoot}/assets/images/barcelona-featured.jpg`);
         this.loc5 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](36.172501, -115.144508, 'Las Vegas, Nevada', `${this.baseRoot}/assets/markers/vegas-marker.png`, [
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/las-vegas-2.jpg', 'Tryna stay out of the scorching sun. `),
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/hoover-dam-1.jpg', 'What a neat dam.`),
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/hoover-dam-2.jpg', 'Mingling with some desert locals on route 66`),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/las-vegas-2.jpg`, 'Tryna stay out of the scorching sun. '),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/hoover-dam-1.jpg`, 'What a neat dam.'),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/hoover-dam-2.jpg`, 'Mingling with some desert locals on route 66'),
         ], `First time going to vegas as an adult and I gotta say, I now understand the hype around a playground for adults.
     Though a little to decadent for my taste, its fun to see all the kinds entertainment available to someone with a pocket full of cash. 
     We evened out the decadence by taking a tour bus from Vegas to the Grand Canyon`, 'Summer 2019', `${this.baseRoot}/assets/images/las-vegas-1.jpg`);
         this.loc7 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](9.909580, -84.054060, 'San Jose Cost Rica', `${this.baseRoot}/assets/markers/costa-rica-marker.png`, [
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, 'assets/images/costa-rica-1.jpg'),
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, 'assets/images/costa-rica-2.jpg'),
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, 'assets/images/costa-rica-3.jpg'),
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, 'assets/images/costa-rica-4.jpg', 'MOUTH OF A VOLCANO, how dope is that?'),
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, 'assets/images/costa-rica-5.jpg')
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/costa-rica-1.jpg`),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/costa-rica-2.jpg`),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/costa-rica-3.jpg`),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/costa-rica-4.jpg`, 'MOUTH OF A VOLCANO, how dope is that?'),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/costa-rica-5.jpg`)
         ], `If I could summarize Costa Rica in one word, it’d be adventure. 
     In my one month there I hiked volcanos, danced on boats and zip lined 
     through the rain forest. I celebrated the fourth of July with illegal 
