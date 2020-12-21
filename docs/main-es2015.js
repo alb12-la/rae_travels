@@ -124,40 +124,41 @@ let AppComponent = class AppComponent {
         this.showActivities = false;
         this.markers = [];
         this.currentAddress = undefined;
+        this.baseRoot = '/rae_travels';
         // Mock data
-        this.loc1 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](48.684820, -123.213830, 'Cattle Point Lighthouse', '../assets/markers/cattle-point-lighthouse-marker.png', [
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/cattle-point-lighthouse-2.jpg'),
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/cattle-point-lighthouse.jpg'),
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/cattle-point-lighthouse-3.jpg'),
+        this.loc1 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](48.684820, -123.213830, 'Cattle Point Lighthouse', `${this.baseRoot}/assets/markers/cattle-point-lighthouse-marker.png`, [
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/cattle-point-lighthouse-2.jpg`),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/cattle-point-lighthouse.jpg`),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/cattle-point-lighthouse-3.jpg`),
         ], `Cattle Point Lighthouse is a lighthouse on the southeastern tip of San Juan Island overlooking
      the Strait of Juan de Fuca where the Haro Straits meet the San Juan Channel, in San Juan County, 
      Washington. The light lies adjacent to the state's Cattle Point Natural Resources Conservation Area
      and, as of 2013, is part of the San Juan Islands National Monument.`, 'Winter 2018');
-        this.loc2 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](32.752310, -117.194640, 'San Diego, California', '../assets/markers/san-diego-marker.png', [
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/san-diego-featured.jpg'),
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/san-diego-3.jpg', 'The beautiful scenery here makes time stand still.'),
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/san-diego-1.jpg'),
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/san-diego-2.jpg', 'Beautiful flamingos.'),
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/san-diego-4.jpg', 'Giant Tortoise older than my parents.'),
+        this.loc2 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](32.752310, -117.194640, 'San Diego, California', `${this.baseRoot}/assets/markers/san-diego-marker.png`, [
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/san-diego-featured.jpg`),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/san-diego-3.jpg`, 'The beautiful scenery here makes time stand still.'),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/san-diego-1.jpg`),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/san-diego-2.jpg', 'Beautiful flamingos.`),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/san-diego-4.jpg', 'Giant Tortoise older than my parents.`),
         ], `California just keeps surprising me with how beautiful it's cities are.
      A weekend in San Diego is all you need to get you feeling like you just came back from a great summer vacation.
      We got to visit the San Diego zoo, which apparently has received numerous
      awards for its exhibits, programs, and reproduction and conservation efforts. `, 'Summer 2019');
-        this.loc4 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](41.403191, 2.174840, 'Barcelona, Spain', '../assets/markers/barcelona-marker.png', [
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/barcelona-7.jpg', 'Pan con Tomate!'),
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/barcelona-3.jpg'),
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/barcelona-5.jpg', 'Plaza de España! '),
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/barcelona-6.jpg', 'So much beautiful architecture.'),
+        this.loc4 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](41.403191, 2.174840, 'Barcelona, Spain', `${this.baseRoot}/assets/markers/barcelona-marker.png`, [
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/barcelona-7.jpg', 'Pan con Tomate!`),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/barcelona-3.jpg`),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/barcelona-5.jpg', 'Plaza de España! `),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/barcelona-6.jpg', 'So much beautiful architecture.`),
         ], `Barcelona can be summed up as a week of non-stop eating and walking.
-     Within the span of one day we\'d average about 30 miles of walking and about 6 small meals throughout the day.`, 'Spring 2019', '../assets/images/barcelona-featured.jpg');
-        this.loc5 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](36.172501, -115.144508, 'Las Vegas, Nevada', '../assets/markers/vegas-marker.png', [
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/las-vegas-2.jpg', 'Tryna stay out of the scorching sun. '),
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/hoover-dam-1.jpg', 'What a neat dam.'),
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/hoover-dam-2.jpg', 'Mingling with some desert locals on route 66'),
+     Within the span of one day we\'d average about 30 miles of walking and about 6 small meals throughout the day.`, 'Spring 2019', `${this.baseRoot}/assets/images/barcelona-featured.jpg`);
+        this.loc5 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](36.172501, -115.144508, 'Las Vegas, Nevada', `${this.baseRoot}/assets/markers/vegas-marker.png`, [
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/las-vegas-2.jpg', 'Tryna stay out of the scorching sun. `),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/hoover-dam-1.jpg', 'What a neat dam.`),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/hoover-dam-2.jpg', 'Mingling with some desert locals on route 66`),
         ], `First time going to vegas as an adult and I gotta say, I now understand the hype around a playground for adults.
     Though a little to decadent for my taste, its fun to see all the kinds entertainment available to someone with a pocket full of cash. 
-    We evened out the decadence by taking a tour bus from Vegas to the Grand Canyon`, 'Summer 2019', '../assets/images/las-vegas-1.jpg');
-        this.loc7 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](9.909580, -84.054060, 'San Jose Cost Rica', '../assets/markers/costa-rica-marker.png', [
+    We evened out the decadence by taking a tour bus from Vegas to the Grand Canyon`, 'Summer 2019', `${this.baseRoot}/assets/images/las-vegas-1.jpg`);
+        this.loc7 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](9.909580, -84.054060, 'San Jose Cost Rica', `${this.baseRoot}/assets/markers/costa-rica-marker.png`, [
             new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, 'assets/images/costa-rica-1.jpg'),
             new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, 'assets/images/costa-rica-2.jpg'),
             new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, 'assets/images/costa-rica-3.jpg'),
@@ -168,17 +169,17 @@ let AppComponent = class AppComponent {
     through the rain forest. I celebrated the fourth of July with illegal 
     fireworks and taught a bar full of people how to ‘Wobble’. I sang karaoke 
     at the top my lungs while arguing with misplaced Texans and remained 
-    completely enamored with the peaceful culture of the Ticas. `, 'Spring 2012', '../assets/images/costa-rica-featured.jpg');
-        this.loc8 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](41.882107, -87.622955, 'Cloud Gate, Chicago', '../assets/markers/chicago-marker.png', [], `No one ever talks about how beautiful Chicago is at night, especially
+    completely enamored with the peaceful culture of the Ticas. `, 'Spring 2012', `${this.baseRoot}/assets/images/costa-rica-featured.jpg`);
+        this.loc8 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](41.882107, -87.622955, 'Cloud Gate, Chicago', `${this.baseRoot}/assets/markers/chicago-marker.png`, [], `No one ever talks about how beautiful Chicago is at night, especially
      when you’re kayaking down the river and between the breweries. 
     No one ever talks about the art hidden throughout downtown or the
     underground tunnels that lead to some of the best Speakeasies in the country.
     No one ever talks about Chicago’s elaborate park and rec spaces nor the electric
     energy that pulses through the city on perfect spring days as people crowd around
-    free outdoor concerts.   They’re keeping Chicago a secret. `, 'Spring 2014', '../assets/images/chicago-featured.jpg');
-        this.loc9 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](13.756331, 100.501762, 'Bangkok, Thailand', '../assets/markers/bangkok-marker.png', [
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/thailand-1.jpg'),
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/thailand-2.jpg')
+    free outdoor concerts.   They’re keeping Chicago a secret. `, 'Spring 2014', `${this.baseRoot}/assets/images/chicago-featured.jpg`);
+        this.loc9 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](13.756331, 100.501762, 'Bangkok, Thailand', `${this.baseRoot}/assets/markers/bangkok-marker.png`, [
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/thailand-1.jpg`),
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/thailand-2.jpg`)
         ], `I knew Thailand for a week yet still cannot tell you who she is.
      Cool evenings are spent on rooftops and hot days on crystal beaches.
      You can trek through the jungle on a Tuesday to bathe an elephant and
@@ -187,22 +188,22 @@ let AppComponent = class AppComponent {
      and gambled with the locals during Muay Thai matches.
      A choose your own adventure track like none other.
 
-    Oh, and there were also elephants.`, 'Winter 2018', '../assets/images/thailand-featured.jpg');
-        this.loc10 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](45.512230, -122.658722, 'Portland, Oregon', '../assets/markers/portland-marker.png', [
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/portland-1.jpg')
-        ], 'Portland is the city of dreams', '01/20/2019', '../assets/images/portland-featured.jpg');
-        this.loc11 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](25.512230, -122.658722, 'Rome, Italy', '../assets/markers/portland-marker.png', [
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/portland-1.jpg')
+    Oh, and there were also elephants.`, 'Winter 2018', `${this.baseRoot}/assets/images/thailand-featured.jpg`);
+        this.loc10 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](45.512230, -122.658722, 'Portland, Oregon', `${this.baseRoot}/assets/markers/portland-marker.png`, [
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/portland-1.jpg`)
+        ], 'Portland is the city of dreams', '01/20/2019', `${this.baseRoot}/assets/images/portland-featured.jpg`);
+        this.loc11 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](25.512230, -122.658722, 'Rome, Italy', `${this.baseRoot}/assets/markers/portland-marker.png`, [
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/portland-1.jpg`)
         ], `Trevi Fountain, the Sistine Chapel, the Vatican. I was amazed then
     , nearly then years ago stepping my first foot in Europe, Rome, the past.
-    I can only imagine how I’ll feel when I finally go back. Whose history will I be traipsing in? My own?`, '01/20/2019', '../assets/images/portland-featured.jpg');
-        this.loc12 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](49.512230, -122.658722, 'Capri Island', '../assets/markers/portland-marker.png', [
-            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, '../assets/images/portland-1.jpg')
+    I can only imagine how I’ll feel when I finally go back. Whose history will I be traipsing in? My own?`, '01/20/2019', `${this.baseRoot}/assets/images/portland-featured.jpg`);
+        this.loc12 = new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Marker"](49.512230, -122.658722, 'Capri Island', `${this.baseRoot}/assets/markers/portland-marker.png`, [
+            new _shared_classes__WEBPACK_IMPORTED_MODULE_2__["Content"](_shared_classes__WEBPACK_IMPORTED_MODULE_2__["ContentType"].IMAGE, `${this.baseRoot}/assets/images/portland-1.jpg`)
         ], `I left the country for the first time in 2009 and on that trip I visited
      what I still believe is the most beautiful place I’ve ever seen. I told
       myself I’d retire there or even bring someone to share it with. I mean look,
        I even took a great photo with a digital camera from 2009, models
-       don’t even photograph this well.`, 'Summer 2009', '../assets/images/portland-featured.jpg');
+       don’t even photograph this well.`, 'Summer 2009', `${this.baseRoot}/assets/images/portland-featured.jpg`);
     }
     ngOnInit() {
         // Prevent `pinch to zoom` on mobile devices;
